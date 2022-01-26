@@ -1,0 +1,63 @@
+---
+# Variables for DNS configuration
+default_lease_time: 600
+max_lease_time: 7200
+
+domain: kringen.local
+
+fqdn: lab.kringen.local
+allowed_ip: 10.0.0.0/24
+subnet: 10.0.0.0
+netmask: 255.255.255.0
+begin_ip: 10.0.0.110
+end_ip: 10.0.0.230
+broadcast_ip: 10.0.0.255
+router: 10.0.0.1
+dns_servers: 10.0.0.50
+
+static_hosts:
+  - name: wingnut
+    ip_addr: 10.0.0.115
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: b8:27:eb:38:95:71
+  - name: kringhub02
+    ip_addr: 10.0.0.128
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 80:1f:02:bc:1c:52
+  - name: bootstrap
+    ip_addr: 10.0.0.106
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 52:54:00:f2:1e:50
+  - name: master0
+    ip_addr: 10.0.0.107
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 52:54:00:f2:1e:51
+  - name: master1
+    ip_addr: 10.0.0.108
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 52:54:00:f2:1e:52
+  - name: master2
+    ip_addr: 10.0.0.109
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 52:54:00:f2:1e:53
+  - name: worker0
+    ip_addr: 10.0.0.110
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 52:54:00:f2:1e:54
+  - name: worker1
+    ip_addr: 10.0.0.111
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 52:54:00:f2:1e:55
+  - name: f34-dev
+    ip_addr: 10.0.0.112
+    router: 10.0.0.1
+    dns_servers: 10.0.0.50
+    mac_address: 52:54:00:f2:1e:56

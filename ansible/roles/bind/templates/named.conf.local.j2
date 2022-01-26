@@ -1,0 +1,9 @@
+zone "{{ domain }}" {
+    type master;
+    file "/etc/named/zones/{{ domain }}.db"; 
+};
+
+zone   "{{ prefix_reverse }}.in-addr.arpa"        {
+    type master;
+    file  "/etc/named/zones/{{ prefix }}.db";
+};

@@ -1,0 +1,65 @@
+---
+# This role installs DHCPD and configures it.
+- name: "Install virt package"
+  package: 
+    name: qemu-kvm
+    state: present
+  tags: virt
+- name: "Install libvirtd"
+  package: 
+    name: libvirt
+    state: present
+  tags: virt
+- name: "Install virt-viewer"
+  package: 
+    name: virt-viewer
+    state: present
+  tags: virt
+- name: "Install virt-install"
+  package: 
+    name: virt-install
+    state: present
+  tags: virt
+- name: "Install virt-manager"
+  package: 
+    name: virt-manager
+    state: present
+  tags: virt
+- name: Get VMs list
+  virt:
+    command: list_vms
+  register: existing_vms
+  changed_when: no
+  tags: virt
+- name: Create VM if not exists
+  block:
+  - name: Copy base image to libvirt directory
+    copy:
+      dest: "{{ libvirt_pool_dir }}/{{ vm_name }}.qcow2"
+      src: "{{ base_image }}"
+      force: no
+      remote_src: yes 
+      mode: 0660
+    register: copy_results
+  - name: Configure the image
+    command: |
+      virt-customize -a {{ base_image }} \
+      --hostname {{ vm_name }}.{{ domain }} \
+      --root-password password:{{ vm_root_pass }} \
+      --ssh-inject 'root:file:{{ ssh_key }}' \
+      --uninstall cloud-init --selinux-relabel
+  - name: Resize the image
+    command: |
+      qemu-img resize {{ libvirt_pool_dir }}/{{ vm_name }}.qcow2 +20G
+  - name: Backup the image
+    command: |
+      cp {{ libvirt_pool_dir }}/{{ vm_name }}.qcow2 {{ libvirt_pool_dir }}/{{ vm_name }}-tmp.qcow2 
+  - name: Resize the filesystem
+    command: |
+      virt-resize --expand /dev/vda3 {{ libvirt_pool_dir }}/{{ vm_name }}-tmp.qcow2 {{ libvirt_pool_dir }}/{{ vm_name }}.qcow2
+  - name: Define vm
+    virt:
+      command: define
+      xml: "{{ lookup('template', 'rhel8-template.xml.j2') }}"
+    when: "vm_name not in existing_vms.list_vms"
+  tags: virt

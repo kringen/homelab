@@ -1,0 +1,54 @@
+---
+# This role installs HAProxy and configures it.
+- name: "Install Bind DNS Server"
+  package: 
+    name: bind
+    state: present
+  tags: bind
+- name: "Install Bind-Utils"
+  package:
+    name: bind-utils
+    state: present
+  tags: bind
+- name: create zones directory
+  file:
+    path: /etc/named/zones
+    state: directory
+  tags: bind
+- name: Copy named.conf config
+  template: 
+    src: named.conf.j2
+    dest: /etc/named.conf
+  tags: bind
+- name: Copy reverse domain config
+  template: 
+    src: prefix.db.j2
+    dest: /etc/named/zones/{{ prefix }}.db
+  tags: bind
+- name: Copy domain config
+  template: 
+    src: "domain.db.j2"
+    dest: /etc/named/zones/{{ domain }}.db
+  tags: bind
+- name: Copy dns config
+  template: 
+    src: "named.conf.local.j2"
+    dest: /etc/named/named.conf.local
+  notify: reload bind
+  tags: bind
+- name: Start the named service
+  service: 
+    name: named
+    state: started
+    enabled: yes
+  tags: bind
+- name: permit traffic in public zone for DNS service
+  firewalld:
+    zone: public
+    service: dns
+    permanent: yes
+    state: enabled
+  tags: bind
+- name: reload firewalld
+  shell: firewall-cmd --reload
+  tags: bind

@@ -1,0 +1,64 @@
+---
+# Variables for DNS configuration
+domain: kringen.local
+
+ns_ip_end: 50
+ns_ip: 10.0.0.50
+nameserver: ns1
+
+fqdn: lab.kringen.local
+allowed_ip: 10.0.0.0/24
+prefix: 10.0.0
+prefix_reverse: 0.0.10
+
+dns_hosts:
+  - name: bootstrap
+    ip_last: 106
+    ip_addr: 10.0.0.106
+  - name: master0
+    ip_last: 107
+    ip_addr: 10.0.0.107
+  - name: master1
+    ip_last: 108
+    ip_addr: 10.0.0.108
+  - name: master2
+    ip_last: 109
+    ip_addr: 10.0.0.109
+  - name: worker0
+    ip_last: 110
+    ip_addr: 10.0.0.110
+  - name: worker1
+    ip_last: 111
+    ip_addr: 10.0.0.111
+  - name: api
+    ip_last: 50
+    ip_addr: 10.0.0.50
+  - name: api-int
+    ip_last: 50
+    ip_addr: 10.0.0.50
+  - name: wingnut
+    ip_last: 115
+    ip_addr: 10.0.0.115
+  - name: kringhub
+    ip_last: 50
+    ip_addr: 10.0.0.50
+  - name: kubemaster
+    ip_last: 77
+    ip_addr: 10.0.0.77
+  - name: kubeworker1
+    ip_last: 78
+    ip_addr: 10.0.0.78
+  - name: kubeworker2
+    ip_last: 79
+    ip_addr: 10.0.0.79
+  - name: kringrhel01
+    ip_last: 105
+    ip_addr: 10.0.0.105
+  - name: kringwkst01
+    ip_last: 55
+    ip_addr: 10.0.0.55
+
+dns_host_no_reverse:
+  - name: "*.apps"
+    ip_last: 50
+    ip_addr: 10.0.0.50

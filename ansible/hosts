@@ -1,0 +1,16 @@
+kringwkst01
+
+[proxy]
+kringwkst01
+
+[bind]
+kringwkst01
+
+[dhcpd]
+kringhub
+
+[virt]
+kringhub
+
+[lab]
+kringwkst01

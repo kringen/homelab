@@ -1,0 +1,19 @@
+---
+# This role installs DHCPD and configures it.
+- name: "Install DHCPD Server"
+  package: 
+    name: dhcp-server
+    state: present
+  tags: dhcpd
+- name: Copy dhcpd config
+  template: 
+    src: "dhcpd.conf.j2"
+    dest: /etc/dhcp/dhcpd.conf
+  notify: restart dhcpd
+  tags: dhcpd
+- name: Start the dhcpd service
+  service: 
+    name: dhcpd
+    state: started
+    enabled: yes
+  tags: dhcpd

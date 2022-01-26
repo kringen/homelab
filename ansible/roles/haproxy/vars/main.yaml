@@ -1,0 +1,26 @@
+---
+# Variables for the HAproxy configuration
+
+# HAProxy supports "http" and "tcp". For SSL, SMTP, etc, use "tcp".
+mode: http
+
+# Port on which HAProxy should listen
+listenport: 8888
+
+# A name for the proxy daemon, this wil be the suffix in the logs.
+daemonname: myapplb
+
+# Balancing Algorithm. Available options:
+# roundrobin, source, leastconn, source, uri
+# (if persistance is required use, "source")
+balance: roundrobin
+
+openshift_masters:
+  - kringmaster01
+  - kringmaster02
+  - kringmaster03
+
+openshift_workers:
+  - kringworker01
+  - kringworker02
+  - kringworker03

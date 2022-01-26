@@ -1,0 +1,12 @@
+---
+# Handlers for bind DNS
+
+- name: restart named
+  service: 
+    name: named
+    state: restarted
+
+- name: reload bind
+  service: 
+    name: bind
+    state: reloaded

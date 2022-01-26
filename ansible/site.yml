@@ -1,0 +1,28 @@
+---
+## This playbook deploys the whole application stack in this site.
+
+# Apply common configuration to all hosts
+- hosts: all
+  roles:
+  - common
+  become: yes
+
+- hosts: proxy
+  roles:
+  - haproxy
+  become: yes
+
+- hosts: bind
+  roles:
+  - bind
+  become: yes
+
+- hosts: dhcpd
+  roles:
+  - dhcpd
+  become: yes
+
+- hosts: virt
+  roles:
+  - virt
+  become: yes

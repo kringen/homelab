@@ -1,0 +1,74 @@
+# Global settings
+#---------------------------------------------------------------------
+global
+    maxconn     20000
+    log         /dev/log local0 info
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 20000
+
+listen stats
+    bind :9000
+    mode http
+    stats enable
+    stats uri /
+    stats show-node
+    stats show-desc Stats for OCP cluster
+    stats auth {{ admin_username }}:{{ admin_password }}
+
+listen api-server-6443 
+  bind *:6443
+  mode tcp
+  {% for host in openshift_masters %}
+  server {{ host }} {{ host }}.{{ cluster_fqdn }}:6443 check inter 1s 
+  {% endfor %}
+
+listen machine-config-server-22623 
+  bind *:22623
+  mode tcp
+  {% for host in openshift_masters %}
+  server {{ host }} {{ host }}.{{ cluster_fqdn }}:22623 check inter 1s
+  {% endfor %}
+
+listen ingress-router-443 
+  bind *:443
+  mode tcp
+  balance source
+  {% for host in openshift_workers %}
+  server {{ host }} {{ host }}.{{ cluster_fqdn }}:443 check inter 1s
+  {% endfor %}
+
+listen ingress-router-80 
+  bind *:80
+  mode tcp
+  balance source
+  {% for host in openshift_workers %}
+  server {{ host }} {{ host }}.{{ cluster_fqdn }}:80 check inter 1s
+  {% endfor %}
