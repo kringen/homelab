@@ -1,15 +1,104 @@
 ---
 
+#Mars geographic feature names
+
+#Aeria
+#Aetheria
+#Aethiopis
+#Amazonis
+#Amenthes
+#Aonium Sinus
+#Arabia
+#Arcadia
+#Argyre
+#Arnon
+#Aurorae Sinus
+#Ausonia
+#Baltia
+#Boreosyrtis
+#Candor
+#Casius
+#Cebrenia
+#Cecropia
+#Ceraunius
+#Cerberus
+#Chalce
+#Chersonesus
+#Chryse
+#Chrysokeras
+#Claritas
+#Copais Palus
+#Coprates
+#Cyclopia
+#Cydonia
+#Deltoton Sinus
+#Depressio Hellespontica
+#Deucalionis Regio
+#Deuteronilus
+#Diacria
+#Dioscuria
+#Edom
+#Electris
+#Elysium
+#Eridania
+#Eunostos
+#Euphrates
+#Gehon
+#Hellas
+#Hellespontus
+#Hesperia
+#Hiddekel
+#Hyperboreus (Lacus)
+#Iapygia (Iapigia)
+#Icaria
+
+
+
 domain: lab.kringen.local
-eth_device_name: enp38s0
 base_image: "/home/erik/libvirt/images/rhel-base-images/rhel-8.5-x86_64-kvm.qcow2"
-mac_address: 52:54:00:f2:1e:56
-vm_name: argyre
-vm_vcpus: 2
-vm_ram_mb: 2048
-vm_net: default
-vm_root_pass: test123
-vm_user_pass: test123
-cleanup_tmp: no
 ssh_key: /home/erik/.ssh/id_rsa.pub
 libvirt_pool_dir: /var/lib/libvirt/images
+
+virtual_machines:
+- vm_name: argyre
+  mac_address: 52:54:00:f2:1e:56
+  vm_vcpus: 8
+  vm_ram_mb: 8192
+  vm_host: kringhub
+  eth_device_name: enp38s0
+- vm_name: cerberus
+  mac_address: 52:54:00:f2:1e:57
+  vm_vcpus: 2
+  vm_ram_mb: 1024
+  vm_host: kringhub
+  eth_device_name: enp38s0
+- vm_name: elysium
+  mac_address: 52:54:00:f2:1e:58
+  vm_vcpus: 2
+  vm_ram_mb: 1027
+  vm_host: kringhub02
+  eth_device_name: enp6s0
+- vm_name: diacria
+  mac_address: 52:54:00:f2:1e:59
+  vm_vcpus: 2
+  vm_ram_mb: 1024
+  vm_host: kringhub02
+  eth_device_name: enp6s0
+- vm_name: cydonia
+  mac_address: 52:54:00:f2:1e:60
+  vm_vcpus: 2
+  vm_ram_mb: 1024
+  vm_host: kringwkst01
+  eth_device_name: enp8s0
+- vm_name: protonilus
+  mac_address: 52:54:00:f2:1e:61
+  vm_vcpus: 2
+  vm_ram_mb: 1024
+  vm_host: kringwkst02
+  eth_device_name: enp8s0
+- vm_name: gehon
+  mac_address: 52:54:00:f2:1e:62
+  vm_vcpus: 2
+  vm_ram_mb: 1024
+  vm_host: kringwkst02
+  eth_device_name: enp8s0
