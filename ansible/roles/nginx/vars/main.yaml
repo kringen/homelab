@@ -1,0 +1,4 @@
+---
+# Variables for the nginx configuration
+server_name: kringlab01
+document_root: /var/www/html

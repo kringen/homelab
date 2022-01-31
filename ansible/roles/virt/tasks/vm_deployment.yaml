@@ -16,7 +16,7 @@
   tags: virt
 - name: Configure the image
   command: |
-    virt-customize -a {{ base_image }} \
+    virt-customize -a {{ base_image_folder }}/{{ item.vm_base_image }} \
     --hostname {{ item.vm_name }}.{{ domain }} \
     --root-password password:{{ vm_root_pass }} \
     --ssh-inject 'root:file:{{ ssh_key }}' \

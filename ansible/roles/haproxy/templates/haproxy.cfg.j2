@@ -40,35 +40,14 @@ listen stats
     stats enable
     stats uri /
     stats show-node
-    stats show-desc Stats for OCP cluster
+    stats show-desc Stats for reverse proxy
     stats auth {{ admin_username }}:{{ admin_password }}
 
-listen api-server-6443 
-  bind *:6443
-  mode tcp
-  {% for host in openshift_masters %}
-  server {{ host }} {{ host }}.{{ cluster_fqdn }}:6443 check inter 1s 
+{% for service in proxy_services %}
+listen {{ service.service_name }}
+  bind *:{{ service.service_port }}
+  mode {{ service.service_protocol }}
+  {% for host in service.service_hosts %}
+  server {{ host.hostname }} {{ host.hostname }}.{{ host.fqdn }}:{{ service.service_port }} {{ host.settings }} 
   {% endfor %}
-
-listen machine-config-server-22623 
-  bind *:22623
-  mode tcp
-  {% for host in openshift_masters %}
-  server {{ host }} {{ host }}.{{ cluster_fqdn }}:22623 check inter 1s
-  {% endfor %}
-
-listen ingress-router-443 
-  bind *:443
-  mode tcp
-  balance source
-  {% for host in openshift_workers %}
-  server {{ host }} {{ host }}.{{ cluster_fqdn }}:443 check inter 1s
-  {% endfor %}
-
-listen ingress-router-80 
-  bind *:80
-  mode tcp
-  balance source
-  {% for host in openshift_workers %}
-  server {{ host }} {{ host }}.{{ cluster_fqdn }}:80 check inter 1s
-  {% endfor %}
+{% endfor %}

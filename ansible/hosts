@@ -1,18 +1,17 @@
-kringhub
-kringwkst01
+[all]
+kringlab01
 
 [proxy]
-kringwkst01
+kringlab01
 
 [bind]
-kringwkst01
+kringlab01
 
 [dhcpd]
-kringhub
+kringlab01
 
 [virt]
-kringhub
-kringwkst01
+kringlab01
 
-[lab]
-kringwkst01
+[nginx]
+kringlab01

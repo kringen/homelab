@@ -3,7 +3,7 @@
 domain: kringen.local
 
 ns_ip_end: 50
-ns_ip: 10.0.0.50
+ns_ip: 10.0.0.10
 nameserver: ns1
 
 fqdn: lab.kringen.local
@@ -12,6 +12,12 @@ prefix: 10.0.0
 prefix_reverse: 0.0.10
 
 dns_hosts:
+  - name: kringlab01
+    ip_last: 10
+    ip_addr: 10.0.0.10
+  - name: kringlab02
+    ip_last: 15
+    ip_addr: 10.0.0.15
   - name: bootstrap
     ip_last: 106
     ip_addr: 10.0.0.106
@@ -32,16 +38,13 @@ dns_hosts:
     ip_addr: 10.0.0.111
   - name: api
     ip_last: 50
-    ip_addr: 10.0.0.50
+    ip_addr: 10.0.0.10
   - name: api-int
     ip_last: 50
-    ip_addr: 10.0.0.50
+    ip_addr: 10.0.0.10
   - name: wingnut
     ip_last: 115
     ip_addr: 10.0.0.115
-  - name: kringhub
-    ip_last: 50
-    ip_addr: 10.0.0.50
   - name: kubemaster
     ip_last: 77
     ip_addr: 10.0.0.77
@@ -61,4 +64,4 @@ dns_hosts:
 dns_host_no_reverse:
   - name: "*.apps"
     ip_last: 50
-    ip_addr: 10.0.0.50
+    ip_addr: 10.0.0.10

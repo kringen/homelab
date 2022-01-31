@@ -15,12 +15,15 @@ daemonname: myapplb
 # (if persistance is required use, "source")
 balance: roundrobin
 
-openshift_masters:
-  - kringmaster01
-  - kringmaster02
-  - kringmaster03
+proxy_services:
+  - service_name: web-server-80
+    service_port: 8080
+    service_protocol: tcp
+    service_hosts: 
+      - hostname: 127.0.0.1
+        fqdn: lab.kringen.local
+        settings: check inter 1s
 
-openshift_workers:
-  - kringworker01
-  - kringworker02
-  - kringworker03
+firewall_rules:
+  - port: 8080/tcp
+  - port: 9000/tcp

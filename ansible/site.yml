@@ -26,3 +26,8 @@
   roles:
   - virt
   become: yes
+
+- hosts: nginx
+  roles:
+  - nginx
+  become: yes
