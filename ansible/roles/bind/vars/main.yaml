@@ -3,7 +3,7 @@
 domain: kringen.local
 
 ns_ip_end: 50
-ns_ip: 10.0.0.10
+ns_ip: 10.0.0.20
 nameserver: ns1
 
 fqdn: lab.kringen.local
@@ -16,50 +16,32 @@ dns_hosts:
     ip_last: 10
     ip_addr: 10.0.0.10
   - name: kringlab02
-    ip_last: 15
-    ip_addr: 10.0.0.15
-  - name: bootstrap
+    ip_last: 20
+    ip_addr: 10.0.0.20
+  - name: argyre
     ip_last: 106
     ip_addr: 10.0.0.106
-  - name: master0
+  - name: cerberus
     ip_last: 107
     ip_addr: 10.0.0.107
-  - name: master1
+  - name: elysium
     ip_last: 108
     ip_addr: 10.0.0.108
-  - name: master2
+  - name: diacria
     ip_last: 109
     ip_addr: 10.0.0.109
-  - name: worker0
+  - name: cydonia
     ip_last: 110
     ip_addr: 10.0.0.110
-  - name: worker1
+  - name: protonilus
     ip_last: 111
     ip_addr: 10.0.0.111
-  - name: api
+  - name: gehon
     ip_last: 50
-    ip_addr: 10.0.0.10
-  - name: api-int
-    ip_last: 50
-    ip_addr: 10.0.0.10
+    ip_addr: 10.0.0.112
   - name: wingnut
     ip_last: 115
     ip_addr: 10.0.0.115
-  - name: kubemaster
-    ip_last: 77
-    ip_addr: 10.0.0.77
-  - name: kubeworker1
-    ip_last: 78
-    ip_addr: 10.0.0.78
-  - name: kubeworker2
-    ip_last: 79
-    ip_addr: 10.0.0.79
-  - name: kringrhel01
-    ip_last: 105
-    ip_addr: 10.0.0.105
-  - name: kringwkst01
-    ip_last: 55
-    ip_addr: 10.0.0.55
 
 dns_host_no_reverse:
   - name: "*.apps"

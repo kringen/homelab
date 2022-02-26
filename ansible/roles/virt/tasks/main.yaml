@@ -25,6 +25,11 @@
     name: virt-manager
     state: present
   tags: virt
+- name: "Install libguestfs-tools"
+  package: 
+    name: libguestfs-tools
+    state: present
+  tags: virt
 - name: Create VM if not exists
   include_tasks: vm_deployment.yaml
   loop: "{{ virtual_machines }}"

@@ -9,45 +9,50 @@ fqdn: lab.kringen.local
 allowed_ip: 10.0.0.0/24
 subnet: 10.0.0.0
 netmask: 255.255.255.0
-begin_ip: 10.0.0.110
+begin_ip: 10.0.0.100
 end_ip: 10.0.0.230
 broadcast_ip: 10.0.0.255
 router: 10.0.0.1
-dns_servers: 10.0.0.10
+dns_servers: 10.0.0.20
 
 static_hosts:
   - name: wingnut
     ip_addr: 10.0.0.115
     router: 10.0.0.1
-    dns_servers: 10.0.0.10
+    dns_servers: 10.0.0.20
     mac_address: b8:27:eb:38:95:71
-  - name: bootstrap
+  - name: argyre
     ip_addr: 10.0.0.106
     router: 10.0.0.1
-    dns_servers: 10.0.0.10
-    mac_address: 52:54:00:f2:1e:50
-  - name: master0
+    dns_servers: 10.0.0.20
+    mac_address: 52:54:00:f2:1e:56
+  - name: cerberus
     ip_addr: 10.0.0.107
     router: 10.0.0.1
-    dns_servers: 10.0.0.10
-    mac_address: 52:54:00:f2:1e:51
-  - name: master1
+    dns_servers: 10.0.0.20
+    mac_address: 52:54:00:f2:1e:57
+  - name: elysium
     ip_addr: 10.0.0.108
     router: 10.0.0.1
-    dns_servers: 10.0.0.10
-    mac_address: 52:54:00:f2:1e:52
-  - name: master2
+    dns_servers: 10.0.0.20
+    mac_address: 52:54:00:f2:1e:58
+  - name: diacria
     ip_addr: 10.0.0.109
     router: 10.0.0.1
-    dns_servers: 10.0.0.10
-    mac_address: 52:54:00:f2:1e:53
-  - name: worker0
+    dns_servers: 10.0.0.20
+    mac_address: 52:54:00:f2:1e:59
+  - name: cydonia
     ip_addr: 10.0.0.110
     router: 10.0.0.1
-    dns_servers: 10.0.0.10
-    mac_address: 52:54:00:f2:1e:54
-  - name: worker1
+    dns_servers: 10.0.0.20
+    mac_address: 52:54:00:f2:1e:60
+  - name: protonilus
     ip_addr: 10.0.0.111
     router: 10.0.0.1
-    dns_servers: 10.0.0.10
-    mac_address: 52:54:00:f2:1e:55
+    dns_servers: 10.0.0.20
+    mac_address: 52:54:00:f2:1e:61
+  - name: gehon
+    ip_addr: 10.0.0.112
+    router: 10.0.0.1
+    dns_servers: 10.0.0.20
+    mac_address: 52:54:00:f2:1e:62

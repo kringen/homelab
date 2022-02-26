@@ -31,3 +31,8 @@
   roles:
   - nginx
   become: yes
+
+- hosts: nfs
+  roles:
+  - nfs
+  become: yes

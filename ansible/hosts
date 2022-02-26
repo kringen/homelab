@@ -1,17 +1,28 @@
 [all]
 kringlab01
+kringlab02
+elysium.lab.kringen.local
+cydonia.lab.kringen.local
+diacria.lab.kringen.local
+argyre.lab.kringen.local
+protonilus.lab.kringen.local
+cerberus.lab.kringen.local
 
 [proxy]
 kringlab01
 
 [bind]
-kringlab01
+kringlab02
 
 [dhcpd]
-kringlab01
+kringlab02
 
 [virt]
 kringlab01
+kringlab02
 
 [nginx]
+kringlab01
+
+[nfs]
 kringlab01

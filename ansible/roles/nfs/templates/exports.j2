@@ -1,0 +1,9 @@
+# /etc/exports: the access control list for filesystems which may be exported
+#   to NFS clients.  See exports(5).
+
+# rw  – This stands for read/write. It grants read and write permissions to the NFS share.
+# sync – The parameter requires the writing of the changes on the disk first before any other operation can be carried out.
+# no_all_squash – This will map all the UIDs & GIDs from the client requests to identical UIDS and GIDs residing on the NFS server.
+# root_squash – The attribute maps requests from the root user on the client-side to an anonymous UID / GID.
+
+{{ nfs_shares_path }}    {{ nfs_shares_host }}{{ nfs_shares_security }}

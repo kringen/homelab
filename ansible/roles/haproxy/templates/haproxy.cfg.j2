@@ -41,13 +41,13 @@ listen stats
     stats uri /
     stats show-node
     stats show-desc Stats for reverse proxy
-    stats auth {{ admin_username }}:{{ admin_password }}
+    stats auth {{ proxy_admin_username }}:{{ proxy_admin_password }}
 
 {% for service in proxy_services %}
 listen {{ service.service_name }}
   bind *:{{ service.service_port }}
   mode {{ service.service_protocol }}
   {% for host in service.service_hosts %}
-  server {{ host.hostname }} {{ host.hostname }}.{{ host.fqdn }}:{{ service.service_port }} {{ host.settings }} 
+  server {{ host.hostname }} {{ host.hostname }}.{{ host.fqdn }}:{{ service.backend_port }} {{ host.settings }} 
   {% endfor %}
 {% endfor %}

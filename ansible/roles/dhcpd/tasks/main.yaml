@@ -17,3 +17,13 @@
     state: started
     enabled: yes
   tags: dhcpd
+- name: permit traffic in public zone for DHCP service
+  firewalld:
+    zone: public
+    service: dhcp
+    permanent: yes
+    state: enabled
+  tags: dhcpd
+- name: reload firewalld
+  shell: firewall-cmd --reload
+  tags: dhcpd

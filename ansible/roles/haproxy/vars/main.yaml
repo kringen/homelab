@@ -18,9 +18,10 @@ balance: roundrobin
 proxy_services:
   - service_name: web-server-80
     service_port: 8080
+    backend_port: 80
     service_protocol: tcp
     service_hosts: 
-      - hostname: 127.0.0.1
+      - hostname: kringlab01
         fqdn: lab.kringen.local
         settings: check inter 1s
 
