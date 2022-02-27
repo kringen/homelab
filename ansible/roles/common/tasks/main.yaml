@@ -2,3 +2,17 @@
   dnf:
     name: chrony
     state: present
+- name: Start the chrony service
+  service: 
+    name: chronyd
+    state: started
+    enabled: yes
+- name: Ensure firewalld is installed
+  dnf:
+    name: firewalld
+    state: present
+- name: Start the firewalld service
+  service: 
+    name: firewalld
+    state: started
+    enabled: yes

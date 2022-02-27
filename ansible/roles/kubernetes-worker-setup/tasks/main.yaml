@@ -1,0 +1,11 @@
+---
+
+- name: Join {{ ansible_facts['nodename'] }} to the k8s cluster
+  command: "{{ kubeadm_join_command }}"
+  register: kubeadm_join_output
+  tags: kubernetes-worker
+
+- debug:
+    msg: "{{ kubeadm_join_output.stdout }}"
+  tags: kubernetes-worker
+  
