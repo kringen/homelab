@@ -33,6 +33,12 @@
     content: |
       br_netfilter
       overlay
+      nf_nat
+      xt_REDIRECT
+      xt_owner
+      iptable_nat
+      iptable_mangle
+      iptable_filter
   tags: kubernetes-common
 
 - name: Tune sysctl parameters  in /proc and the sysctl file

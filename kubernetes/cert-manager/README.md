@@ -12,3 +12,19 @@ helm install \
   --version v1.7.1 \
   --set installCRDs=true
 ```
+
+# Create a cert-manager Issuer
+```
+kubectl apply -f clusterissuer.yaml
+```
+
+# Create a certificate in istio-system namespace
+```
+kubectl apply -f certificate.yaml
+```
+
+# Troubleshoot
+```
+istioctl analyze
+```
+

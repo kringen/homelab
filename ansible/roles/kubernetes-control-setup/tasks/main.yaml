@@ -1,10 +1,10 @@
 ---
 
-#- name: Initialize the Kubernetes Cluster
-#  command: kubeadm init --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}" 
-#  register: kubeadm_init
-#  failed_when: kubeadm_init.rc != 0
-#  tags: kubernetes-control
+- name: Initialize the Kubernetes Cluster
+  command: kubeadm init --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}" 
+  register: kubeadm_init
+  failed_when: kubeadm_init.rc != 0
+  tags: kubernetes-control
 
 - name: Create bootstrap token with kubeadm
   command: kubeadm token create --print-join-command 
