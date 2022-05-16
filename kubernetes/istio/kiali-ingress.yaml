@@ -9,11 +9,15 @@ spec:
     istio: ingressgateway # use Istio default gateway implementation
   servers:
   - port:
-      number: 20001
-      name: http
-      protocol: HTTP
+      number: 443
+      name: https
+      protocol: HTTPS
     hosts:
-    - "kiali.kringen.local"
+    - "kiali.kringen.io"
+    tls:
+      credentialName: cert-kiali-kringen-io
+      mode: SIMPLE
+
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -22,7 +26,7 @@ metadata:
   name: kiali
 spec:
   hosts:
-  - "kiali.kringen.local"
+  - "kiali.kringen.io"
   gateways:
   - kiali-gateway
   http:
@@ -34,3 +38,25 @@ spec:
         port:
           number: 20001
         host: kiali
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-kiali-kringen-io
+  namespace: istio-system
+spec:
+  # name of the tls secret to store
+  # the generated certificate/key pair
+  secretName: cert-kiali-kringen-io
+  issuerRef:
+    # Issuer Name
+    # kubectl get issuer or kubectl get clusterissuer
+    name: letsencrypt
+    # The default value is Issuer (i.e.
+    # a locally namespaced Issuer)
+    kind: ClusterIssuer
+  commonName: kiali.kringen.io
+  dnsNames:
+   # one or more fully-qualified domain names
+   # can be defined here
+  - kiali.kringen.io
