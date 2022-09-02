@@ -1,5 +1,5 @@
 ---
 # Variables for the nginx configuration
-nfs_shares_path: /mnt/nfs/share 
+nfs_shares_path: /mnt/nfs/shares 
 nfs_shares_host: "*"
 nfs_shares_security: (rw,sync,no_root_squash,no_subtree_check)
