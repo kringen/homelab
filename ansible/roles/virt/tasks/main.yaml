@@ -4,34 +4,34 @@
   package: 
     name: qemu-kvm
     state: present
-  tags: virt
+  
 - name: "Install libvirtd"
   package: 
     name: libvirt
     state: present
-  tags: virt
+  
 - name: "Install virt-viewer"
   package: 
     name: virt-viewer
     state: present
-  tags: virt
+  
 - name: "Install virt-install"
   package: 
     name: virt-install
     state: present
-  tags: virt
+  
 - name: "Install virt-manager"
   package: 
     name: virt-manager
     state: present
-  tags: virt
+  
 - name: "Install libguestfs-tools"
   package: 
     name: libguestfs-tools
     state: present
-  tags: virt
+  
 - name: Create VM if not exists
   include_tasks: vm_deployment.yaml
   loop: "{{ virtual_machines }}"
   when: inventory_hostname == item.vm_host
-  tags: virt
+  

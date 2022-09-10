@@ -4,19 +4,16 @@
   package:
     name: haproxy
     state: present
-  tags: proxy
 - name: Configure the haproxy cnf file with hosts
   template: 
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
   notify: restart haproxy
-  tags: proxy
 - name: Start the haproxy service
   service: 
     name: haproxy
     state: started
     enabled: yes
-  tags: proxy
 - name: permit traffic in public zone for services
   firewalld:
     zone: public
@@ -24,7 +21,5 @@
     permanent: yes
     state: enabled
   loop: "{{ firewall_rules }}"
-  tags: proxy
 - name: reload firewalld
   shell: firewall-cmd --reload
-  tags: proxy

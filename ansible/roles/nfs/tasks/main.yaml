@@ -4,7 +4,7 @@
   package:
     name: nfs-utils
     state: present
-  tags: nfs
+  
 - name: Create a mountable directory if it does not exist
   file:
     path: /mnt/nfs/shares
@@ -12,7 +12,7 @@
     owner: nobody
     group: nobody
     mode: '0777'
-  tags: nfs
+  
 - name: Copy exports file
   template: 
     src: "exports.j2"
@@ -21,37 +21,37 @@
     group: root
     mode: 0644
   notify: restart nfs-server
-  tags: nfs
+  
 - name: Start the rpcbind service
   service: 
     name: rpcbind
     state: started
     enabled: yes
-  tags: nfs
+  
 - name: Start the nfs service
   service: 
     name: nfs-server
     state: started
     enabled: yes
-  tags: nfs
+  
 - name: permit traffic in public zone for nfs service
   firewalld:
     zone: public
     service: nfs
     permanent: yes
     state: enabled
-  tags: nfs
+  
 - name: permit traffic in public zone for rpc-bind service
   firewalld:
     zone: public
     service: rpc-bind
     permanent: yes
     state: enabled
-  tags: nfs
+  
 - name: permit traffic in public zone for mountd service
   firewalld:
     zone: public
     service: mountd
     permanent: yes
     state: enabled
-  tags: nfs
+  

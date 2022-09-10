@@ -4,26 +4,26 @@
   package:
     name: nginx
     state: present
-  tags: nginx
+  
 - name: Configure the nginx conf file
   template: 
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
   notify: restart nginx
-  tags: nginx
+  
 - name: Start the nginx service
   service: 
     name: nginx
     state: started
     enabled: yes
-  tags: nginx
+  
 - name: permit traffic in public zone for http service
   firewalld:
     zone: public
     service: http
     permanent: yes
     state: enabled
-  tags: nginx
+  
 - name: reload firewalld
   shell: firewall-cmd --reload
-  tags: nginx
+  

@@ -4,18 +4,15 @@
   command: kubeadm init --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}" 
   register: kubeadm_init
   failed_when: kubeadm_init.rc != 0
-  tags: kubernetes-control
 
 - name: Create bootstrap token with kubeadm
   command: kubeadm token create --print-join-command 
   register: kubeadm_join_command
-  tags: kubernetes-control
 
 - name: Ensures /home/erik/.kube dir exists
   file: 
     path: /home/erik/.kube
     state: directory
-  tags: kubernetes-control
 
 - name: Copy admin.conf to local .kube directory
   copy:
@@ -26,48 +23,39 @@
     mode: 0660
     owner: erik
     group: erik
-  tags: kubernetes-control
 
 - debug: 
     msg: "{{ kubeadm_join_command.stdout }}"
-  tags: kubernetes-control
 
 - name: Create .kube directory
   file:
     path: /root/.kube
     state: directory
-  tags: kubernetes-control
 
 - name: Copy kubernetes config file for kubectl
   copy:
     src: /etc/kubernetes/admin.conf
     remote_src: yes
     dest: /root/.kube/config
-  tags: kubernetes-control
 
 - name: Install the Tigera Operator 
   command: kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml 
   register: tigera_operator_install
   failed_when: tigera_operator_install.rc != 0
-  tags: kubernetes-control
 
 - debug:
     msg: "{{ tigera_operator_install.stdout }}"
-  tags: kubernetes-control
 
 - name: Copy calico manifest file
   template: 
     src: calico-base.yaml.j2
     dest: $HOME/calico-base.yaml
-  tags: kubernetes-control
 
 - name: Install Calico 
   command: kubectl create -f $HOME/calico-base.yaml 
   register: calico_install
   failed_when: calico_install.rc != 0
-  tags: kubernetes-control
 
 - debug:
     msg: "{{ calico_install.stdout }}"
-  tags: kubernetes-control
   

@@ -4,26 +4,21 @@
   package: 
     name: dhcp-server
     state: present
-  tags: dhcpd
 - name: Copy dhcpd config
   template: 
     src: "dhcpd.conf.j2"
     dest: /etc/dhcp/dhcpd.conf
   notify: restart dhcpd
-  tags: dhcpd
 - name: Start the dhcpd service
   service: 
     name: dhcpd
     state: started
     enabled: yes
-  tags: dhcpd
 - name: permit traffic in public zone for DHCP service
   firewalld:
     zone: public
     service: dhcp
     permanent: yes
     state: enabled
-  tags: dhcpd
 - name: reload firewalld
   shell: firewall-cmd --reload
-  tags: dhcpd

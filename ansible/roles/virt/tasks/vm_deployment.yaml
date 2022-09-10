@@ -4,7 +4,7 @@
     command: list_vms
   register: existing_vms
   changed_when: no
-  tags: virt
+  
 - name: Copy base image to libvirt directory
   copy:
     dest: "{{ libvirt_pool_dir }}/{{ item.vm_name }}.qcow2"
@@ -13,7 +13,7 @@
     remote_src: yes 
     mode: 0660
   register: copy_results
-  tags: virt
+  
 - name: Configure the image
   command: |
     virt-customize -a {{ libvirt_pool_dir }}/{{ item.vm_name }}.qcow2 \
@@ -22,40 +22,40 @@
     --ssh-inject 'root:file:{{ ssh_key }}' \
     --uninstall cloud-init --selinux-relabel
   when: "item.vm_name not in existing_vms.list_vms"
-  tags: virt
+  
 - name: Resize the image
   command: |
     qemu-img resize {{ libvirt_pool_dir }}/{{ item.vm_name }}.qcow2 +20G
   when: "item.vm_name not in existing_vms.list_vms"
-  tags: virt
+  
 - name: Backup the image
   command: |
    cp {{ libvirt_pool_dir }}/{{ item.vm_name }}.qcow2 {{ libvirt_pool_dir }}/{{ item.vm_name }}-tmp.qcow2 
   when: "item.vm_name not in existing_vms.list_vms"
-  tags: virt
+  
 - name: Resize the filesystem
   command: |
     virt-resize --expand /dev/vda3 {{ libvirt_pool_dir }}/{{ item.vm_name }}-tmp.qcow2 {{ libvirt_pool_dir }}/{{ item.vm_name }}.qcow2
   when: "item.vm_name not in existing_vms.list_vms"
-  tags: virt
+  
 - name: Remove temporary images
   command: |
     rm {{ libvirt_pool_dir }}/{{ item.vm_name }}-tmp.qcow2
   when: "item.vm_name not in existing_vms.list_vms"
-  tags: virt
+  
 - name: Define vm
   virt:
     command: define
     xml: "{{ lookup('template', 'rhel8-template.xml.j2') }}"
   when: "item.vm_name not in existing_vms.list_vms"
-  tags: virt
+  
 - name: Set vm as autostart
   virt:
     autostart: yes
     name: "{{ item.vm_name }}"
-  tags: virt
+  
 - name: Start VM
   virt:
     state: running
     name: "{{ item.vm_name }}"
-  tags: virt
+  
