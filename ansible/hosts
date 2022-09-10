@@ -1,6 +1,7 @@
 [all]
 kringlab01
 kringlab02
+kringlab03
 elysium.lab.kringen.local
 cydonia.lab.kringen.local
 diacria.lab.kringen.local
@@ -15,11 +16,12 @@ kringlab01
 kringlab02
 
 [dhcpd]
-kringlab02
+#kringlab02
 
 [virt]
 kringlab01
 kringlab02
+kringlab03
 
 [nginx]
 kringlab01
