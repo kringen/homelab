@@ -41,7 +41,7 @@ listen stats
     stats uri /
     stats show-node
     stats show-desc Stats for reverse proxy
-    stats auth {{ proxy_admin_username }}:{{ proxy_admin_password }}
+    stats auth {{ lookup('password', '/dev/null length=6 chars=ascii_letters') }}:{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}
 
 {% for service in proxy_services %}
 listen {{ service.service_name }}

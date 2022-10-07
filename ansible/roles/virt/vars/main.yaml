@@ -56,56 +56,6 @@
 
 domain: lab.kringen.local
 base_image_folder: /var/lib/libvirt/images
-ssh_key: /home/erik/.ssh/id_rsa.pub
+ssh_key: /home/erik/shared_keys/id_rsa.pub
 libvirt_pool_dir: /var/lib/libvirt/images
 
-virtual_machines:
-- vm_name: argyre
-  mac_address: 52:54:00:f2:1e:56
-  vm_vcpus: 8
-  vm_ram_mb: 8192
-  vm_host: kringlab02
-  vm_base_image: rhel-8.5-x86_64-kvm.qcow2
-  eth_device_name: enp38s0
-- vm_name: cerberus
-  mac_address: 52:54:00:f2:1e:57
-  vm_vcpus: 8
-  vm_ram_mb: 8192
-  vm_host: kringlab02
-  vm_base_image: rhel-8.5-x86_64-kvm.qcow2
-  eth_device_name: enp38s0
-- vm_name: elysium
-  mac_address: 52:54:00:f2:1e:58
-  vm_vcpus: 8
-  vm_ram_mb: 8192
-  vm_host: kringlab01
-  vm_base_image: rhel-8.5-x86_64-kvm.qcow2
-  eth_device_name: enp6s0
-- vm_name: diacria
-  mac_address: 52:54:00:f2:1e:59
-  vm_vcpus: 8
-  vm_ram_mb: 8192
-  vm_host: kringlab01
-  vm_base_image: rhel-8.5-x86_64-kvm.qcow2
-  eth_device_name: enp6s0
-- vm_name: cydonia
-  mac_address: 52:54:00:f2:1e:60
-  vm_vcpus: 8
-  vm_ram_mb: 8192
-  vm_host: kringlab01
-  vm_base_image: rhel-8.5-x86_64-kvm.qcow2
-  eth_device_name: enp6s0
-- vm_name: protonilus
-  mac_address: 52:54:00:f2:1e:61
-  vm_vcpus: 8
-  vm_ram_mb: 8192
-  vm_host: kringlab02
-  vm_base_image: rhel-8.5-x86_64-kvm.qcow2
-  eth_device_name: enp38s0
-- vm_name: gehon
-  mac_address: 52:54:00:f2:1e:62
-  vm_vcpus: 8
-  vm_ram_mb: 8192
-  vm_host: kringwkst02
-  vm_base_image: rhel-8.5-x86_64-kvm.qcow2
-  eth_device_name: enp8s0

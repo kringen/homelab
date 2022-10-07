@@ -3,6 +3,19 @@
   command: "{{ kubeadm_join_command }}"
   register: kubeadm_join_output
 
+- name: Enable network modules
+  modprobe:
+    name: {{ item }}
+    state: present
+  loop:
+  - br_netfilter
+  - nf_nat
+  - xt_REDIRECT
+  - xt_owner
+  - iptable_nat
+  - iptable_mangle
+  - iptable_filter
+
 - debug:
     msg: "{{ kubeadm_join_output.stdout }}"
   

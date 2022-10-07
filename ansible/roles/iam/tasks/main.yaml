@@ -1,0 +1,20 @@
+---
+
+- name: "Create user accounts and add users to groups"
+  user:
+    name: "{{ item }}"
+    password: "{{ user_password }}"
+    groups: "wheel"
+  with_items: "{{ users }}"
+
+#- name: Copy ssh key
+#  ansible.builtin.copy:
+#    src: "{{ ssh_key }}"
+#    dest: /home/erik/id_rsa.pub
+#    mode: '0644'
+
+- name: "Add authorized keys"
+  authorized_key:
+    user: "{{ item }}"
+    key: "{{ lookup('file', '/home/erik/shared_keys/id_rsa.pub') }}"
+  with_items: "{{ users }}"

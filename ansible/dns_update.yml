@@ -1,0 +1,7 @@
+---
+
+# Apply common configuration to all hosts
+- hosts: bind
+  roles:
+  - bind
+  become: yes

@@ -1,0 +1,32 @@
+---
+## This playbook deploys services on bare metal.
+
+- hosts: bare_metal
+  roles:
+  - common
+  become: yes
+
+- hosts: proxy
+  roles:
+  - haproxy
+  become: yes
+
+- hosts: bind
+  roles:
+  - bind
+  become: yes
+
+- hosts: virt
+  roles:
+  - virt
+  become: yes
+
+- hosts: nginx
+  roles:
+  - nginx
+  become: yes
+
+- hosts: nfs
+  roles:
+  - nfs
+  become: yes

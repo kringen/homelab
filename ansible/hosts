@@ -1,33 +1,53 @@
 [all]
-kringlab01
-kringlab02
-kringlab03
+10.0.0.10
+10.0.0.20
+10.0.0.30
 elysium.lab.kringen.local
 cydonia.lab.kringen.local
 diacria.lab.kringen.local
 argyre.lab.kringen.local
 protonilus.lab.kringen.local
 cerberus.lab.kringen.local
+hellas.lab.kringen.local
+gehon.lab.kringen.local
+edom.lab.kringen.local
+
+[bare_metal]
+10.0.0.10
+10.0.0.20
+10.0.0.30
 
 [proxy]
-kringlab01
+10.0.0.10
 
 [bind]
-kringlab02
+10.0.0.20
 
 [dhcpd]
 #kringlab02
 
 [virt]
-kringlab01
-kringlab02
-kringlab03
+10.0.0.10
+10.0.0.20
+10.0.0.30
+
 
 [nginx]
-kringlab01
+10.0.0.10
 
 [nfs]
-kringlab01
+10.0.0.10
+
+[virtual_machines]
+elysium.lab.kringen.local
+cydonia.lab.kringen.local
+diacria.lab.kringen.local
+argyre.lab.kringen.local
+protonilus.lab.kringen.local
+cerberus.lab.kringen.local
+hellas.lab.kringen.local
+gehon.lab.kringen.local
+edom.lab.kringen.local
 
 [kubernetes_node]
 elysium.lab.kringen.local
@@ -36,13 +56,20 @@ diacria.lab.kringen.local
 argyre.lab.kringen.local
 protonilus.lab.kringen.local
 cerberus.lab.kringen.local
+hellas.lab.kringen.local
+gehon.lab.kringen.local
+edom.lab.kringen.local
+
 
 [kubernetes_control]
 elysium.lab.kringen.local
+protonilus.lab.kringen.local
+gehon.lab.kringen.local
 
 [kubernetes_workers]
+argyre.lab.kringen.local
 cydonia.lab.kringen.local
 diacria.lab.kringen.local
-argyre.lab.kringen.local
-protonilus.lab.kringen.local
 cerberus.lab.kringen.local
+hellas.lab.kringen.local
+edom.lab.kringen.local

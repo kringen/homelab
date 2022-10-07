@@ -18,6 +18,11 @@ $TTL    1440
 {{ host.name }}.{{ fqdn }}.  IN  A {{ host.ip_addr }}
 {% endfor %}
 
+{% for host in virtual_machines %}
+{{ host.vm_name }}.{{ fqdn }}.  IN  A {{ host.ip_addr }}
+{% endfor %}
+
+
 {% for host in dns_host_no_reverse %}
 {{ host.name }}.{{ fqdn }}.  IN  A {{ host.ip_addr }}
 {% endfor %}

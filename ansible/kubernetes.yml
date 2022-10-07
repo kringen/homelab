@@ -1,0 +1,17 @@
+---
+## This playbook deploys kubernetes on virtual machine nodes.
+
+- hosts: kubernetes_node
+  roles:
+  - kubernetes-common
+  become: yes
+
+- hosts: kubernetes_control
+  roles:
+  - kubernetes-control-setup
+  become: yes
+
+- hosts: kubernetes_workers
+  roles:
+  - kubernetes-worker-setup
+  become: yes

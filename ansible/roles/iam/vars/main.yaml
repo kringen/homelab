@@ -1,0 +1,6 @@
+---
+users:
+- erik
+
+ssh_key: /home/erik/shared_keys/id_rsa.pub
+

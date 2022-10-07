@@ -1,3 +1,5 @@
+#- name: Register system
+#  shell: "subscription-manager register --username {{ redhat_username }} --password {{ redhat_password }} --auto-attach"
 - name: Ensure chrony is installed
   dnf:
     name: chrony
@@ -16,3 +18,21 @@
     name: firewalld
     state: started
     enabled: yes
+- name: ensure warning banner is configured properly
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - motd
+    - issue
+    - issue.net
+- name: Remove cockpit banner
+  file:
+    state: absent
+    path: "{{ item }}"
+  loop:
+  - /etc/issue.d/cockpit.issue
+  - /etc/motd.d/cockpit

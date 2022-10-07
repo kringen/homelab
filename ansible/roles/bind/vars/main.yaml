@@ -2,7 +2,7 @@
 # Variables for DNS configuration
 domain: kringen.local
 
-ns_ip_end: 50
+ns_ip_end: 20
 ns_ip: 10.0.0.20
 nameserver: ns1
 
@@ -18,27 +18,9 @@ dns_hosts:
   - name: kringlab02
     ip_last: 20
     ip_addr: 10.0.0.20
-  - name: argyre
-    ip_last: 106
-    ip_addr: 10.0.0.106
-  - name: cerberus
-    ip_last: 107
-    ip_addr: 10.0.0.107
-  - name: elysium
-    ip_last: 108
-    ip_addr: 10.0.0.108
-  - name: diacria
-    ip_last: 109
-    ip_addr: 10.0.0.109
-  - name: cydonia
-    ip_last: 110
-    ip_addr: 10.0.0.110
-  - name: protonilus
-    ip_last: 111
-    ip_addr: 10.0.0.111
-  - name: gehon
-    ip_last: 50
-    ip_addr: 10.0.0.112
+  - name: kringlab03
+    ip_last: 30
+    ip_addr: 10.0.0.30
   - name: wingnut
     ip_last: 115
     ip_addr: 10.0.0.115
