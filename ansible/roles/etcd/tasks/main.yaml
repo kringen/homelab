@@ -1,0 +1,13 @@
+- name: Download etcd release
+  get_url:
+    url: "{{ etcd_release_url }}"
+    dest: "/tmp/{{ etcd_tarball }}"
+    mode: "0644"
+
+- name: Extract etcd
+  unarchive:
+    src: "/tmp/{{ etcd_tarball }}"
+    dest: "/tmp/etcd"
+
+- name: Move etcd
+  shell: sudo mv {{ etcd_folder }}/etcd* /usr/local/bin/

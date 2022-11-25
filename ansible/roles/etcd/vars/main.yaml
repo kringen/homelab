@@ -1,0 +1,4 @@
+etcd_version: "3.5.6"
+etcd_folder: etcd-v{{ etcd_version }}-linux-amd64
+etcd_tarball: {{ etcd_folder }}.tar.gz
+etcd_release_url: https://github.com/etcd-io/etcd/releases/download/v{{ etcd_version }}/{{ etcd_tarball }}

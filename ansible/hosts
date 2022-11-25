@@ -60,11 +60,10 @@ hellas.lab.kringen.local
 gehon.lab.kringen.local
 edom.lab.kringen.local
 
+[kubernetes_etcd]
 
 [kubernetes_control]
 elysium.lab.kringen.local
-protonilus.lab.kringen.local
-gehon.lab.kringen.local
 
 [kubernetes_workers]
 argyre.lab.kringen.local
@@ -73,3 +72,5 @@ diacria.lab.kringen.local
 cerberus.lab.kringen.local
 hellas.lab.kringen.local
 edom.lab.kringen.local
+protonilus.lab.kringen.local
+gehon.lab.kringen.local
