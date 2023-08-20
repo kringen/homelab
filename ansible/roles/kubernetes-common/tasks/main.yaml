@@ -103,21 +103,21 @@
     - containerd
     - kubelet
 
-- name: permit traffic in public zone for services
-  firewalld:
-    zone: public
-    port: "{{ item.port }}"
-    permanent: yes
-    state: enabled
-  loop: "{{ firewall_rules }}"
+#- name: permit traffic in public zone for services
+#  firewalld:
+#    zone: public
+#    port: "{{ item.port }}"
+#    permanent: yes
+#    state: enabled
+#  loop: "{{ firewall_rules }}"
 
-- name: permit traffic in public zone for services
-  firewalld:
-    zone: public
-    service: "{{ item.service }}"
-    permanent: yes
-    state: enabled
-  loop: "{{ firewall_services }}"
+#- name: permit traffic in public zone for services
+#  firewalld:
+#    zone: public
+#    service: "{{ item.service }}"
+#    permanent: yes
+#    state: enabled
+#  loop: "{{ firewall_services }}"
 
-- name: reload firewalld
-  shell: firewall-cmd --reload
+#- name: reload firewalld
+#  shell: firewall-cmd --reload

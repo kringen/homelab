@@ -1,0 +1,22 @@
+[req]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+[req_distinguished_name]
+[v3_req]
+basicConstraints = critical, CA:FALSE
+keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = kringnode06.lab.kringen.local
+IP.1 = 10.0.0.107
+DNS.2 = kringnode09.lab.kringen.local
+IP.2 = 10.0.0.113
+DNS.3 = kringnode01.lab.kringen.local
+IP.3 = 10.0.0.108
+IP.4 = 127.0.0.1
+DNS.5 = kubernetes
+DNS.6 = kubernetes.default
+DNS.7 = kubernetes.default.svc
+DNS.8 = kubernetes.default.svc.cluster
+DNS.9 = kubernetes.default.svc.cluster.local

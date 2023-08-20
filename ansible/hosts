@@ -1,27 +1,34 @@
 [all]
+10.0.0.5
 10.0.0.10
 10.0.0.20
 10.0.0.30
-elysium.lab.kringen.local
-cydonia.lab.kringen.local
-diacria.lab.kringen.local
-argyre.lab.kringen.local
-protonilus.lab.kringen.local
-cerberus.lab.kringen.local
-hellas.lab.kringen.local
-gehon.lab.kringen.local
-edom.lab.kringen.local
+kringnode01.lab.kringen.local
+kringnode02.lab.kringen.local
+kringnode03.lab.kringen.local
+kringnode04.lab.kringen.local
+kringnode05.lab.kringen.local
+kringnode06.lab.kringen.local
+kringnode07.lab.kringen.local
+kringnode08.lab.kringen.local
+kringnode09.lab.kringen.local
+
+[hub]
+10.0.0.5
 
 [bare_metal]
+10.0.0.5
 10.0.0.10
 10.0.0.20
 10.0.0.30
 
 [proxy]
 10.0.0.10
+10.0.0.20
+10.0.0.30
 
 [bind]
-10.0.0.20
+10.0.0.5
 
 [dhcpd]
 #kringlab02
@@ -39,38 +46,38 @@ edom.lab.kringen.local
 10.0.0.10
 
 [virtual_machines]
-elysium.lab.kringen.local
-cydonia.lab.kringen.local
-diacria.lab.kringen.local
-argyre.lab.kringen.local
-protonilus.lab.kringen.local
-cerberus.lab.kringen.local
-hellas.lab.kringen.local
-gehon.lab.kringen.local
-edom.lab.kringen.local
+kringnode01.lab.kringen.local
+kringnode02.lab.kringen.local
+kringnode03.lab.kringen.local
+kringnode04.lab.kringen.local
+kringnode05.lab.kringen.local
+kringnode06.lab.kringen.local
+kringnode07.lab.kringen.local
+kringnode08.lab.kringen.local
+kringnode09.lab.kringen.local
 
 [kubernetes_node]
-elysium.lab.kringen.local
-cydonia.lab.kringen.local
-diacria.lab.kringen.local
-argyre.lab.kringen.local
-protonilus.lab.kringen.local
-cerberus.lab.kringen.local
-hellas.lab.kringen.local
-gehon.lab.kringen.local
-edom.lab.kringen.local
+kringnode01.lab.kringen.local
+kringnode02.lab.kringen.local
+kringnode03.lab.kringen.local
+kringnode04.lab.kringen.local
+kringnode05.lab.kringen.local
+kringnode06.lab.kringen.local
+kringnode07.lab.kringen.local
+kringnode08.lab.kringen.local
+kringnode09.lab.kringen.local
 
 [kubernetes_etcd]
 
 [kubernetes_control]
-elysium.lab.kringen.local
+kringnode01.lab.kringen.local
+kringnode06.lab.kringen.local
+kringnode09.lab.kringen.local
 
 [kubernetes_workers]
-argyre.lab.kringen.local
-cydonia.lab.kringen.local
-diacria.lab.kringen.local
-cerberus.lab.kringen.local
-hellas.lab.kringen.local
-edom.lab.kringen.local
-protonilus.lab.kringen.local
-gehon.lab.kringen.local
+kringnode04.lab.kringen.local
+kringnode02.lab.kringen.local
+kringnode03.lab.kringen.local
+kringnode07.lab.kringen.local
+kringnode05.lab.kringen.local
+kringnode08.lab.kringen.local

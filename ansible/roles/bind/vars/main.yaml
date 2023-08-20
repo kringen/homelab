@@ -2,8 +2,8 @@
 # Variables for DNS configuration
 domain: kringen.local
 
-ns_ip_end: 20
-ns_ip: 10.0.0.20
+ns_ip_end: 5
+ns_ip: 10.0.0.5
 nameserver: ns1
 
 fqdn: lab.kringen.local

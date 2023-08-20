@@ -1,0 +1,5 @@
+- hosts: hub
+  roles:
+  - common
+  - bind
+  become: yes

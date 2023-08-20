@@ -14,12 +14,12 @@
     name: haproxy
     state: started
     enabled: yes
-- name: permit traffic in public zone for services
-  firewalld:
-    zone: public
-    port: "{{ item.port }}"
-    permanent: yes
-    state: enabled
-  loop: "{{ firewall_rules }}"
-- name: reload firewalld
-  shell: firewall-cmd --reload
+#- name: permit traffic in public zone for services
+#  firewalld:
+#    zone: public
+#    port: "{{ item.port }}"
+#    permanent: yes
+#    state: enabled
+#  loop: "{{ firewall_rules }}"
+#- name: reload firewalld
+#  shell: firewall-cmd --reload

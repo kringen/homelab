@@ -2,11 +2,15 @@
 # This role installs HAProxy and configures it.
 - name: "Install Bind DNS Server"
   package: 
-    name: bind
+    name: bind9
     state: present
 - name: "Install Bind-Utils"
   package:
-    name: bind-utils
+    name: bind9utils
+    state: present
+- name: "Install Bind-Utils"
+  package:
+    name: dnsutils
     state: present
 - name: create zones directory
   file:
@@ -34,11 +38,16 @@
     name: named
     state: started
     enabled: yes
-- name: permit traffic in public zone for DNS service
-  firewalld:
-    zone: public
-    service: dns
-    permanent: yes
-    state: enabled
-- name: reload firewalld
-  shell: firewall-cmd --reload
+
+# TODO:  For Raspberry Pi, you may need to disable ipv6 resolution by updating /etc/default/named
+#  with OPTIONS="-u bind -4"
+
+
+#- name: permit traffic in public zone for DNS service
+#  firewalld:
+#    zone: public
+#    service: dns
+#    permanent: yes
+#    state: enabled
+#- name: reload firewalld
+#  shell: firewall-cmd --reload

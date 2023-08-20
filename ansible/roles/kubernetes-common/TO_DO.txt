@@ -1,3 +1,0 @@
-# Istio was having issues with iptables so ran these commands on worker nodes:
-# https://github.com/istio/istio/issues/23009
- modprobe br_netfilter ; modprobe nf_nat ; modprobe xt_REDIRECT ; modprobe xt_owner; modprobe iptable_nat; modprobe iptable_mangle; modprobe iptable_filter

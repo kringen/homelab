@@ -1,7 +1,7 @@
 #- name: Register system
 #  shell: "subscription-manager register --username {{ redhat_username }} --password {{ redhat_password }} --auto-attach"
 - name: Ensure chrony is installed
-  dnf:
+  package:
     name: chrony
     state: present
 - name: Start the chrony service
@@ -9,15 +9,15 @@
     name: chronyd
     state: started
     enabled: yes
-- name: Ensure firewalld is installed
-  dnf:
-    name: firewalld
-    state: present
-- name: Start the firewalld service
-  service: 
-    name: firewalld
-    state: started
-    enabled: yes
+#- name: Ensure firewalld is installed
+#  dnf:
+#    name: firewalld
+#    state: present
+#- name: Start the firewalld service
+#  service: 
+#    name: firewalld
+#    state: started
+#    enabled: yes
 - name: ensure warning banner is configured properly
   copy:
     src: "{{ item }}"

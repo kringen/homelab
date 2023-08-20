@@ -34,24 +34,24 @@
     state: started
     enabled: yes
   
-- name: permit traffic in public zone for nfs service
-  firewalld:
-    zone: public
-    service: nfs
-    permanent: yes
-    state: enabled
+#- name: permit traffic in public zone for nfs service
+#  firewalld:
+#    zone: public
+#    service: nfs
+#    permanent: yes
+#    state: enabled
   
-- name: permit traffic in public zone for rpc-bind service
-  firewalld:
-    zone: public
-    service: rpc-bind
-    permanent: yes
-    state: enabled
+#- name: permit traffic in public zone for rpc-bind service
+#  firewalld:
+#    zone: public
+#    service: rpc-bind
+#    permanent: yes
+#    state: enabled
   
-- name: permit traffic in public zone for mountd service
-  firewalld:
-    zone: public
-    service: mountd
-    permanent: yes
-    state: enabled
+#- name: permit traffic in public zone for mountd service
+#  firewalld:
+#    zone: public
+#    service: mountd
+#    permanent: yes
+#    state: enabled
   

@@ -1,5 +1,5 @@
 virtual_machines:
-- vm_name: argyre
+- vm_name: kringnode04
   mac_address: 52:54:00:f2:1e:56
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -7,7 +7,7 @@ virtual_machines:
   vm_host: 10.0.0.20
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp38s0
-- vm_name: cerberus
+- vm_name: kringnode06
   mac_address: 52:54:00:f2:1e:57
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -15,7 +15,7 @@ virtual_machines:
   vm_host: 10.0.0.20
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp38s0
-- vm_name: elysium
+- vm_name: kringnode01
   mac_address: 52:54:00:f2:1e:58
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -23,7 +23,7 @@ virtual_machines:
   vm_host: 10.0.0.10
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp6s0
-- vm_name: diacria
+- vm_name: kringnode03
   mac_address: 52:54:00:f2:1e:59
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -31,7 +31,7 @@ virtual_machines:
   vm_host: 10.0.0.10
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp6s0
-- vm_name: cydonia
+- vm_name: kringnode02
   mac_address: 52:54:00:f2:1e:60
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -39,7 +39,7 @@ virtual_machines:
   vm_host: 10.0.0.10
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp6s0
-- vm_name: protonilus
+- vm_name: kringnode05
   mac_address: 52:54:00:f2:1e:61
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -47,7 +47,7 @@ virtual_machines:
   vm_host: 10.0.0.20
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp38s0
-- vm_name: edom
+- vm_name: kringnode09
   mac_address: 52:54:00:f2:1e:53
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -55,7 +55,7 @@ virtual_machines:
   vm_host: 10.0.0.30
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp6s0
-- vm_name: gehon
+- vm_name: kringnode08
   mac_address: 52:54:00:f2:1e:55
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -63,7 +63,7 @@ virtual_machines:
   vm_host: 10.0.0.30
   vm_base_image: rhel-8.5-x86_64-kvm.qcow2
   eth_device_name: enp6s0
-- vm_name: hellas
+- vm_name: kringnode07
   mac_address: 52:54:00:f2:1e:54
   vm_vcpus: 8
   vm_ram_mb: 8192
@@ -77,7 +77,7 @@ virtual_machines:
 # End Banner
 
 
-#Hellas
+#kringnode07
 #Hellespontus
 #Hesperia
 #Hiddekel

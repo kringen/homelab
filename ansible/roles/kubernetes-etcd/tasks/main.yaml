@@ -10,4 +10,4 @@
     dest: "/tmp/etcd"
 
 - name: Move etcd
-  shell: sudo mv {{ etcd_folder }}/etcd* /usr/local/bin/
+  shell: mv {{ etcd_folder }}/etcd* /usr/local/bin/ && chmod 755 /usr/local/bin/etcd*

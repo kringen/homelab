@@ -17,13 +17,13 @@
     state: started
     enabled: yes
   
-- name: permit traffic in public zone for http service
-  firewalld:
-    zone: public
-    service: http
-    permanent: yes
-    state: enabled
+#- name: permit traffic in public zone for http service
+#  firewalld:
+#    zone: public
+#    service: http
+#    permanent: yes
+#    state: enabled
   
-- name: reload firewalld
-  shell: firewall-cmd --reload
+#- name: reload firewalld
+#  shell: firewall-cmd --reload
   
