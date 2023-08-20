@@ -26,7 +26,7 @@ provider "libvirt" {
 resource "libvirt_volume" "qcow_volume" {
   name = "${var.vm_name}.img"
   pool = "default"
-  source = "/var/lib/libvirt/rhel-9.2-x86_64-kvm.qcow2"
+  source = "/var/lib/libvirt/images/rhel-8.5-x86_64-kvm.qcow2"
   format = "qcow2"
 }
 
