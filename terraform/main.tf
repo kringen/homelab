@@ -1,60 +1,50 @@
-variable "vm_name" {
-  type = string
-  default = "my-test-vm"
-}
-
-variable "domain" {
-  type = string
-  default = "example.com"
-}
-
-variable "memory" {
-  type = string
-  default = "2048"
-}
-
-variable "cpu" {
-  type = number
-  default = 2
-}
 
 provider "libvirt" {
   uri = "qemu+ssh://10.0.0.10/system"
 }
 
+# Base OS image to use to create a cluster of different nodes
+resource "libvirt_volume" "rhel8_base" {
+  name   = "rhel8_base"
+  source = "/var/lib/libvirt/images/rhel-8.5-x86_64-kvm.qcow2"
+}
 
 resource "libvirt_volume" "qcow_volume" {
-  name = "${var.vm_name}.img"
+  for_each = { for index, vm in var.virtual_machines : vm.name => vm }
+  name = "${each.value.name}.img"
   pool = "default"
-  source = "/var/lib/libvirt/images/rhel-8.5-x86_64-kvm.qcow2"
-  format = "qcow2"
+  base_volume_id = libvirt_volume.rhel8_base.id
 }
 
 data "template_file" "user_data" {
+  for_each = { for index, vm in var.virtual_machines : vm.name => vm }
   template = file("${path.module}/cloud_init.cfg")
 
   vars = {
-   hostname = var.vm_name
-   domain = var.domain
+   hostname = each.value.name
+   domain = each.value.domain
+   ssh_public_key = var.ssh_public_key
   }
 }
 
 resource "libvirt_cloudinit_disk" "commoninit" {
-  name           = "commoninit.iso"
-  user_data      = data.template_file.user_data.rendered
+  for_each = { for index, vm in var.virtual_machines : vm.name => vm }
+  name           = "${each.value.name}-init.iso"
+  user_data      = data.template_file.user_data[each.key].rendered
   pool           = "default"
 }
 
 # Define KVM domain to create
 resource "libvirt_domain" "kvm_domain" {
-  name   = var.vm_name
-  memory = var.memory
-  vcpu   = var.cpu
+  for_each = { for index, vm in var.virtual_machines : vm.name => vm }
+  name   = each.value.name
+  memory = each.value.memory
+  vcpu   = each.value.cpu
 
-  cloudinit = libvirt_cloudinit_disk.commoninit.id
+  cloudinit = libvirt_cloudinit_disk.commoninit[each.key].id
 
   disk {
-    volume_id = libvirt_volume.qcow_volume.id
+    volume_id = libvirt_volume.qcow_volume[each.key].id
   }
 
   console {
@@ -70,15 +60,9 @@ resource "libvirt_domain" "kvm_domain" {
   }
 
   network_interface {
-    hostname       = "mytestvm"
-    mac            = "52:54:00:f2:1e:69"
-    addresses      = ["10.0.0.125"]
-    //bridge         =  "virbr0"
-    macvtap        = "enp6s0"
+    mac            = each.value.mac
+    addresses      = [each.value.ip]
+    macvtap        = each.value.bridge
     wait_for_lease = false
   }
-}
-
-output "ip" {
-  value = libvirt_domain.kvm_domain.network_interface.0.addresses.0
 }

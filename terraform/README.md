@@ -6,3 +6,6 @@ sudo usermod -a -G kvm $(whoam)
 ```
 ## libvirt provider
 https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs
+
+## Environment Variables
+export TF_VAR_ssh_public_key1=""
