@@ -4,8 +4,8 @@ virtual_machines = [
         "domain"  = "lab.kringen.local"
         "memory"  = "8192"
         "cpu"     = "8"
-        "mac"     = "52:54:00:f2:1e:58"
-        "ip"       = "10.0.0.108"
+        "mac"     = "52:54:00:f2:1e:72"
+        "ip"       = "10.0.0.125"
         "bridge"   = "enp6s0"
         "host" = "kringlab01"
     } ,

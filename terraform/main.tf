@@ -20,6 +20,8 @@ resource "libvirt_volume" "qcow_volume" {
   name = "${each.value.name}.img"
   pool = "default"
   base_volume_id = libvirt_volume.rhel8_base.id
+  size = 20 * 1024 * 1024 * 1024 # 20GiB. the root FS is automatically resized by cloud-init growpart (see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#grow-partitions).
+
 }
 
 data "template_file" "user_data" {
