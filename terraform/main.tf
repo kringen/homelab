@@ -74,7 +74,6 @@ resource "libvirt_domain" "kvm_domain" {
 
   network_interface {
     mac            = each.value.mac
-    addresses      = [each.value.ip]
     macvtap        = each.value.bridge
     wait_for_lease = false
   }
