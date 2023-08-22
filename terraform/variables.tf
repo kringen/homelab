@@ -8,11 +8,3 @@ variable "ssh_public_key" {
     type = string
     description = "Public SSH key for connectiong to the VM"
 }
-
-variable "tfc_organization" {
-    type = string
-}
-
-variable "tfc_workspace" {
-    type = string
-}
