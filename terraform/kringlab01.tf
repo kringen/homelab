@@ -6,6 +6,13 @@ provider "libvirt" {
   alias = "kringlab01"
 }
 
+resource "libvirt_pool" "pool_01"{
+  provider = libvirt.kringlab01
+  name = "default"
+  type = "dir"
+  path = "/var/lib/libvirt/images"
+}
+
 # Base OS image to use to create a cluster of different nodes
 resource "libvirt_volume" "rhel8_base_01" {
   provider = libvirt.kringlab01
@@ -18,7 +25,7 @@ resource "libvirt_volume" "qcow_volume_01" {
               vm.name => vm if vm.host == "kringlab01" }
   provider = libvirt.kringlab01
   name = "${each.value.name}.img"
-  pool = "default"
+  pool = libvirt_pool.pool_01.name
   base_volume_id = libvirt_volume.rhel8_base_01.id
   size = 20 * 1024 * 1024 * 1024 # 20GiB. the root FS is automatically resized by cloud-init growpart (see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#grow-partitions).
 
@@ -30,7 +37,7 @@ resource "libvirt_cloudinit_disk" "commoninit_01" {
               vm.name => vm if vm.host == "kringlab01" }
   name           = "${each.value.name}-init.iso"
   user_data      = data.template_file.user_data[each.key].rendered
-  pool           = "default"
+  pool           = libvirt_pool.pool_01.name
 }
 
 # Define KVM domain to create
