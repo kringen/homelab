@@ -25,7 +25,7 @@ resource "libvirt_volume" "qcow_volume_03" {
               vm.name => vm if vm.host == "kringlab03" }
   provider = libvirt.kringlab03
   name = "${each.value.name}.img"
-  pool = "default"
+  pool = libvirt_pool.pool_03.name
   base_volume_id = libvirt_volume.rhel8_base_03.id
   size = 20 * 1024 * 1024 * 1024 # 20GiB. the root FS is automatically resized by cloud-init growpart (see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#grow-partitions).
 
@@ -37,7 +37,7 @@ resource "libvirt_cloudinit_disk" "commoninit_03" {
               vm.name => vm if vm.host == "kringlab03" }
   name           = "${each.value.name}-init.iso"
   user_data      = data.template_file.user_data[each.key].rendered
-  pool           = "default"
+  pool           = libvirt_pool.pool_03.name
 }
 
 # Define KVM domain to create
