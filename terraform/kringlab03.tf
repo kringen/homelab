@@ -7,36 +7,24 @@ provider "libvirt" {
 }
 
 # Base OS image to use to create a cluster of different nodes
-resource "libvirt_volume" "rhel8_base" {
+resource "libvirt_volume" "rhel8_base_03" {
   provider = libvirt.kringlab03
   name   = "rhel8_base"
   source = "/var/lib/libvirt/images/rhel-8.5-x86_64-kvm.qcow2"
 }
 
-resource "libvirt_volume" "qcow_volume" {
+resource "libvirt_volume" "qcow_volume_03" {
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab03" }
   provider = libvirt.kringlab03
   name = "${each.value.name}.img"
   pool = "default"
-  base_volume_id = libvirt_volume.rhel8_base.id
+  base_volume_id = libvirt_volume.rhel8_base_03.id
   size = 20 * 1024 * 1024 * 1024 # 20GiB. the root FS is automatically resized by cloud-init growpart (see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#grow-partitions).
 
 }
 
-data "template_file" "user_data" {
-  for_each = { for index, vm in var.virtual_machines : 
-              vm.name => vm if vm.host == "kringlab03" }
-  template = file("${path.module}/cloud_init.cfg")
-
-  vars = {
-   hostname = each.value.name
-   domain = each.value.domain
-   ssh_public_key = var.ssh_public_key
-  }
-}
-
-resource "libvirt_cloudinit_disk" "commoninit" {
+resource "libvirt_cloudinit_disk" "commoninit_03" {
   provider = libvirt.kringlab03
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab03" }
@@ -46,7 +34,7 @@ resource "libvirt_cloudinit_disk" "commoninit" {
 }
 
 # Define KVM domain to create
-resource "libvirt_domain" "kvm_domain" {
+resource "libvirt_domain" "kvm_domain_03" {
   provider = libvirt.kringlab03
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab03" }
@@ -54,10 +42,10 @@ resource "libvirt_domain" "kvm_domain" {
   memory = each.value.memory
   vcpu   = each.value.cpu
 
-  cloudinit = libvirt_cloudinit_disk.commoninit[each.key].id
+  cloudinit = libvirt_cloudinit_disk.commoninit_03[each.key].id
 
   disk {
-    volume_id = libvirt_volume.qcow_volume[each.key].id
+    volume_id = libvirt_volume.qcow_volume_03[each.key].id
   }
 
   console {
