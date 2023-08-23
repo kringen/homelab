@@ -6,6 +6,13 @@ provider "libvirt" {
   alias = "kringlab03"
 }
 
+resource "libvirt_pool" "pool_03"{
+  provider = libvirt.kringlab03
+  name = "default"
+  type = "dir"
+  path = "/var/lib/libvirt/images"
+}
+
 # Base OS image to use to create a cluster of different nodes
 resource "libvirt_volume" "rhel8_base_03" {
   provider = libvirt.kringlab03
