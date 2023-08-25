@@ -8,3 +8,11 @@ variable "ssh_public_key" {
     type = string
     description = "Public SSH key for connectiong to the VM"
 }
+
+variable "redhat_email" {
+    type = string
+}
+
+variable "redhat_password" {
+    type = string
+}
