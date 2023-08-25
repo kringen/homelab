@@ -1,0 +1,9 @@
+---
+
+# Apply common configuration to all hosts
+- hosts: virtual_machines
+  remote_user: root
+  roles:
+  - common
+  - iam
+  become: yes
