@@ -8,5 +8,5 @@
 - hosts: proxy
   remote_user: erik
   roles:
-  - proxy
+  - haproxy
   become: yes
