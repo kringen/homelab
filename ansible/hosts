@@ -46,26 +46,26 @@ kringnode09.lab.kringen.local
 10.0.0.10
 
 [virtual_machines]
-kringnode01.lab.kringen.local
-kringnode02.lab.kringen.local
-kringnode03.lab.kringen.local
-kringnode04.lab.kringen.local
-kringnode05.lab.kringen.local
-kringnode06.lab.kringen.local
-kringnode07.lab.kringen.local
-kringnode08.lab.kringen.local
-kringnode09.lab.kringen.local
+10.0.0.106
+10.0.0.107
+10.0.0.108
+10.0.0.109
+10.0.0.110
+10.0.0.111
+10.0.0.112
+10.0.0.113
+10.0.0.114
 
 [kubernetes_node]
-kringnode01.lab.kringen.local
-kringnode02.lab.kringen.local
-kringnode03.lab.kringen.local
-kringnode04.lab.kringen.local
-kringnode05.lab.kringen.local
-kringnode06.lab.kringen.local
-kringnode07.lab.kringen.local
-kringnode08.lab.kringen.local
-kringnode09.lab.kringen.local
+10.0.0.106
+10.0.0.107
+10.0.0.108
+10.0.0.109
+10.0.0.110
+10.0.0.111
+10.0.0.112
+10.0.0.113
+10.0.0.114
 
 [kubernetes_etcd]
 
