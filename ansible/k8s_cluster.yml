@@ -1,9 +1,12 @@
 ---
-
-# Apply common configuration to all hosts
 - hosts: virtual_machines
-  remote_user: root
+  remote_user: erik
   roles:
   - common
   - iam
+  become: yes
+- hosts: proxy
+  remote_user: erik
+  roles:
+  - proxy
   become: yes
