@@ -3,7 +3,6 @@
   remote_user: erik
   roles:
   - common
-  - iam
   become: yes
 - hosts: proxy
   remote_user: erik
