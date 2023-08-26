@@ -70,6 +70,11 @@
     gpgcheck: yes
     gpgkey: https://download.docker.com/linux/centos/gpg
 
+- name: upgrade all packages
+  yum: 
+    name: '*'
+    state: latest
+
 - name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
   yum:
     name: "{{ packages }}"
