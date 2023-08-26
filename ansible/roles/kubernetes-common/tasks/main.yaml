@@ -54,7 +54,7 @@
 - name: Add Kubernetes repository 
   yum_repository:
     baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    name: "Kubernetes"
+    name: "kubernetes"
     state: present 
     description: "Kubernetes Repository"
     gpgcheck: yes
@@ -70,15 +70,11 @@
     gpgcheck: yes
     gpgkey: https://download.docker.com/linux/centos/gpg
 
-- name: upgrade all packages
-  yum: 
-    name: '*'
-    state: latest
 
 - name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
   yum:
     name: "{{ packages }}"
-    disable_excludes: "Kubernetes"
+    disable_excludes: "kubernetes"
   vars:
     packages:
     - containerd.io

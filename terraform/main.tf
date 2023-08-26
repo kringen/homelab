@@ -9,5 +9,6 @@ data "template_file" "user_data" {
    ssh_public_key = var.ssh_public_key
    redhat_email = var.redhat_email
    redhat_password = var.redhat_password
+   redhat_pool = var.redhat_pool
   }
 }
