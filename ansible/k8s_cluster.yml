@@ -16,10 +16,10 @@
   - kubernetes-common
   become: yes
 
-#- hosts: kubernetes_control
-#  roles:
-#  - kubernetes-control-setup
-#  become: yes
+- hosts: kubernetes_control
+  roles:
+  - kubernetes-control-setup
+  become: yes
 
 #- hosts: kubernetes_workers
 #  roles:
