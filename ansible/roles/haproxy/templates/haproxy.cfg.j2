@@ -2,29 +2,6 @@
 
 
 #---------------------------------------------------------------------
-# apiserver frontend which proxys to the control plane nodes
-#---------------------------------------------------------------------
-frontend apiserver
-    bind *:${APISERVER_DEST_PORT}
-    mode tcp
-    option tcplog
-    default_backend apiserver
-
-#---------------------------------------------------------------------
-# round robin balancing for apiserver
-#---------------------------------------------------------------------
-backend apiserver
-    option httpchk GET /healthz
-    http-check expect status 200
-    mode tcp
-    option ssl-hello-chk
-    balance     roundrobin
-        server ${HOST1_ID} ${HOST1_ADDRESS}:${APISERVER_SRC_PORT} check
-        # [...]
-
-
-
-#---------------------------------------------------------------------
 # Global settings
 #---------------------------------------------------------------------
 global
@@ -71,11 +48,26 @@ listen stats
     stats show-desc Stats for reverse proxy
     stats auth {{ lookup('password', '/dev/null length=6 chars=ascii_letters') }}:{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}
 
-{% for service in proxy_services %}
-listen {{ service.service_name }}
+{% for service in proxy_services_frontend %}
+{{ service.service_comment }}
+frontend {{ service.service_name }}
   bind *:{{ service.service_port }}
   mode {{ service.service_protocol }}
-  {% for host in service.service_hosts %}
-  server {{ host.hostname }} {{ host.hostname }}.{{ host.fqdn }}:{{ service.backend_port }} {{ host.settings }} 
+  {% for option in service.service_options %}
+  option {{ option }}
+  {% endfor %}
+  default_backend {{ service.service_backend }}
+{% endfor %}
+
+{% for service in proxy_services_backend %}
+{{ service.service_comment }}
+backend {{ service.service_name }}
+  {% for option in service.service_options %}
+  option {{ option }}
+  {% endfor %}
+  http-check expect status 200
+  balance {{ service.balance }}
+  {% for host in service.backend_hosts %}
+  server {{ service.service_name }}-{{loop.index}} {{ host }}:{{ service.backend_port }} check
   {% endfor %}
 {% endfor %}

@@ -6,6 +6,11 @@
     name: haproxy
     state: restarted
 
+- name: restart keepalived
+  service:
+    name: keepalived
+    state: restarted
+
 - name: reload haproxy
   service: 
     name: haproxy

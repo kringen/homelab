@@ -4,8 +4,24 @@
   roles:
   - common
   become: yes
+  
 - hosts: proxy
   remote_user: erik
   roles:
   - haproxy
+  become: yes
+
+- hosts: kubernetes_node
+  roles:
+  - kubernetes-common
+  become: yes
+
+- hosts: kubernetes_control
+  roles:
+  - kubernetes-control-setup
+  become: yes
+
+- hosts: kubernetes_workers
+  roles:
+  - kubernetes-worker-setup
   become: yes

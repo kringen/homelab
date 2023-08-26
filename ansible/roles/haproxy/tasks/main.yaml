@@ -4,14 +4,30 @@
   package:
     name: haproxy
     state: present
+- name: "Install keepalived"
+  package:
+    name: keepalived
+    state: present
 - name: Configure the haproxy cnf file with hosts
   template: 
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
   notify: restart haproxy
+- name: Enable selinux boolean haproxy_connect_any
+  seboolean: name=haproxy_connect_any state=yes persistent=yes
 - name: Start the haproxy service
   service: 
     name: haproxy
+    state: started
+    enabled: yes
+- name: Configure keepalived
+  template: 
+    src: keepalived.conf.j2
+    dest: /etc/keepalived/keepalived.conf
+  notify: restart keepalived
+- name: Start the keepalived service
+  service:
+    name: keepalived
     state: started
     enabled: yes
 #- name: permit traffic in public zone for services

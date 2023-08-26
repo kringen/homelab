@@ -2,7 +2,6 @@
 # Variables for the HAproxy configuration
 
 # HAProxy supports "http" and "tcp". For SSL, SMTP, etc, use "tcp".
-mode: http
 
 # Port on which HAProxy should listen
 listenport: 8888
@@ -15,16 +14,38 @@ daemonname: myapplb
 # (if persistance is required use, "source")
 balance: roundrobin
 
-proxy_services:
-  - service_name: web-server-80
-    service_port: 8080
-    backend_port: 80
+proxy_services_frontend:
+  - service_name: kube-apiserver
+    service_comment: |
+      #---------------------------------------------------------------------
+      # apiserver frontend which proxys to the control plane nodes
+      #---------------------------------------------------------------------
+    service_port: 6443
     service_protocol: tcp
-    service_hosts: 
-      - hostname: kringlab01
-        fqdn: lab.kringen.local
-        settings: check inter 1s
+    service_options: 
+      - tcplog
+    service_backend: kube-apiserver
+
+proxy_services_backend:
+  - service_name: kube-apiserver
+    service_comment: |
+      #---------------------------------------------------------------------
+      # round robin balancing for apiserver
+      #---------------------------------------------------------------------
+    backend_port: 6443
+    service_protocol: tcp
+    service_options: 
+      - tcplog
+      - httpchk GET /healthz
+      - ssl-hello-chk
+    balance: roundrobin
+    backend_hosts:
+      - 10.0.0.107
+      - 10.0.0.108
+      - 10.0.0.113
 
 firewall_rules:
   - port: 8080/tcp
   - port: 9000/tcp
+
+virtual_ip_address: "10.0.0.100"

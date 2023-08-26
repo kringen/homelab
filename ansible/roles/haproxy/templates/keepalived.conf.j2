@@ -1,0 +1,40 @@
+global_defs {
+  notification_email {
+  }
+  router_id LVS_DEVEL
+  vrrp_skip_check_adv_addr
+  vrrp_garp_interval 0
+  vrrp_gna_interval 0
+}
+
+vrrp_script chk_haproxy {
+  script "killall -0 haproxy"
+  interval 2
+  weight 2
+}
+
+vrrp_instance haproxy-vip {
+  state BACKUP
+  priority 100
+  interface {{ ansible_default_ipv4.interface }}                       # Network card
+  virtual_router_id 60
+  advert_int 1
+  authentication {
+    auth_type PASS
+    auth_pass 1111
+  }
+  unicast_src_ip {{ inventory_hostname }}      # The IP address of this machine
+  unicast_peer {
+    {% for host in play_hosts if host != inventory_hostname %}
+    {{ host }}                         # The IP address of peer machines
+    {% endfor %}
+  }
+
+  virtual_ipaddress {
+    {{ virtual_ip_address }}                  # The VIP address
+  }
+
+  track_script {
+    chk_haproxy
+  }
+}
