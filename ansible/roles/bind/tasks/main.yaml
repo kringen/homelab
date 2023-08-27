@@ -2,16 +2,16 @@
 # This role installs HAProxy and configures it.
 - name: "Install Bind DNS Server"
   package: 
-    name: bind9
+    name: bind
     state: present
 - name: "Install Bind-Utils"
   package:
-    name: bind9utils
+    name: bind-utils
     state: present
-- name: "Install Bind-Utils"
-  package:
-    name: dnsutils
-    state: present
+#- name: "Install Bind-Utils"
+#  package:
+#    name: dnsutils
+#    state: present
 - name: create zones directory
   file:
     path: /etc/named/zones

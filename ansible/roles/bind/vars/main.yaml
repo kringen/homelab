@@ -2,8 +2,8 @@
 # Variables for DNS configuration
 domain: kringen.local
 
-ns_ip_end: 5
-ns_ip: 10.0.0.5
+ns_ip_end: 20
+ns_ip: 10.0.0.20
 nameserver: ns1
 
 fqdn: lab.kringen.local
@@ -21,6 +21,33 @@ dns_hosts:
   - name: kringlab03
     ip_last: 30
     ip_addr: 10.0.0.30
+  - name: kringnode01
+    ip_last: 108
+    ip_addr: 10.0.0.108
+  - name: kringnode02
+    ip_last: 110
+    ip_addr: 10.0.0.110
+  - name: kringnode03
+    ip_last: 109
+    ip_addr: 10.0.0.109
+  - name: kringnode04
+    ip_last: 106
+    ip_addr: 10.0.0.106
+  - name: kringnode05
+    ip_last: 111
+    ip_addr: 10.0.0.111
+  - name: kringnode06
+    ip_last: 107
+    ip_addr: 10.0.0.107
+  - name: kringnode07
+    ip_last: 107
+    ip_addr: 10.0.0.112
+  - name: kringnode08
+    ip_last: 114
+    ip_addr: 10.0.0.114
+  - name: kringnode09
+    ip_last: 113
+    ip_addr: 10.0.0.113
   - name: wingnut
     ip_last: 115
     ip_addr: 10.0.0.115
