@@ -22,21 +22,12 @@ global
 # use if not designated in their block
 #---------------------------------------------------------------------
 defaults
-    mode                    http
     log                     global
     option                  httplog
     option                  dontlognull
-    option http-server-close
-    option forwardfor       except 127.0.0.0/8
-    option                  redispatch
-    retries                 1
-    timeout http-request    10s
-    timeout queue           20s
-    timeout connect         5s
-    timeout client          20s
-    timeout server          20s
-    timeout http-keep-alive 10s
-    timeout check           10s
+    timeout                 connect 5000
+    timeout                 client 50000
+    timeout                 server 50000
     maxconn                 20000
 
 listen stats
@@ -65,8 +56,8 @@ backend {{ service.service_name }}
   {% for option in service.service_options %}
   option {{ option }}
   {% endfor %}
-  http-check expect status 200
   balance {{ service.balance }}
+  default-server inter 10s downinter 5s rise 2 fall 2 slowstart 60s maxconn 250 maxqueue 256 weight 100
   {% for host in service.backend_hosts %}
   server {{ service.service_name }}-{{loop.index}} {{ host }}:{{ service.backend_port }} check
   {% endfor %}

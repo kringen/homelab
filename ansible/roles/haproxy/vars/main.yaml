@@ -36,8 +36,6 @@ proxy_services_backend:
     service_protocol: tcp
     service_options: 
       - tcplog
-      - httpchk GET /healthz
-      - ssl-hello-chk
     balance: roundrobin
     backend_hosts:
       - 10.0.0.107
