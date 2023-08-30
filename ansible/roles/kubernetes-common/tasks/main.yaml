@@ -80,7 +80,7 @@
   yum:
     name: "{{ packages }}"
     disable_excludes: "kubernetes"
-    gpgcheck: false
+    disable_gpg_check: true
   vars:
     packages:
     - containerd.io
