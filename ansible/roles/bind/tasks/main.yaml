@@ -36,7 +36,7 @@
 - name: Start the named service
   service: 
     name: named
-    state: started
+    state: restarted
     enabled: yes
 
 # TODO:  For Raspberry Pi, you may need to disable ipv6 resolution by updating /etc/default/named
