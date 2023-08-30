@@ -1,7 +1,7 @@
 ---
 
 - name: Initialize the Kubernetes Cluster
-  command: kubeadm init --control-plane-endpoint "kringkube.lab.kringen.local:6443" --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}" --upload-certs
+  command: kubeadm init --control-plane-endpoint "kube.lab.kringen.local:6443" --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}" --upload-certs
   register: kubeadm_init
   failed_when: kubeadm_init.rc != 0
 

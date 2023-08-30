@@ -21,7 +21,7 @@ dns_hosts:
   - name: kringlab03
     ip_last: 30
     ip_addr: 10.0.0.30
-  - name: kringkube
+  - name: kube
     ip_last: 100
     ip_addr: 10.0.0.100
   - name: kringnode01
