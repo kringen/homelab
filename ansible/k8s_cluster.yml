@@ -20,8 +20,7 @@
   roles:
   - kubernetes-control-setup
   become: yes
-
-#- hosts: kubernetes_workers
-#  roles:
-#  - kubernetes-worker-setup
-#  become: yes
+- hosts: kubernetes_workers
+  roles:
+  - kubernetes-worker-setup
+  become: yes
