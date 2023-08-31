@@ -27,9 +27,10 @@
 - debug: 
     msg: "{{ kubeadm_join_command.stdout }}"
 
-- name: Setting join command…
-  set_fact:
-    join_command: “{{ kubeadm_join_command.stdout }}”
+- name: "Add K8S join info to dummy host"
+  add_host:
+    name:   "K8S_JOIN_HOLDER"
+    join_command:  "{{ kubeadm_join_command.stdout }}"
 
 - name: Create .kube directory
   file:
