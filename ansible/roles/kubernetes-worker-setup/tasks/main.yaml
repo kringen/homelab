@@ -1,6 +1,6 @@
 ---
 - name: Join {{ ansible_facts['nodename'] }} to the k8s cluster
-  command: "{{ kubeadm_join_command }}"
+  command: "{{ hostvars['10.0.0.108']['join_command']  }}"
   register: kubeadm_join_output
 
 # - name: Enable network modules
