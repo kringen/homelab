@@ -71,6 +71,8 @@
 
 [kubernetes_control]
 10.0.0.107
+
+[kubernetes_co-control]
 10.0.0.108
 10.0.0.113
 

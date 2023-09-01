@@ -9,6 +9,10 @@
   command: kubeadm token create --print-join-command 
   register: kubeadm_join_command
 
+- name: Create co-control token with kubeadm
+  command: kubeadm token create --print-join-command --control-plane --certificate-key $(kubeadm alpha certs certificate-key)
+  register: kubeadm_control_join_command
+
 - name: Ensures /home/erik/.kube dir exists
   file: 
     path: /home/erik/.kube
@@ -30,6 +34,7 @@
 - name: "Add K8S join info to dummy host"
   add_host:
     name:   "K8S_JOIN_HOLDER"
+    control_command: "{{ kubeadm_control_join_command.stdout }}"
     join_command:  "{{ kubeadm_join_command.stdout }}"
 
 - name: Create .kube directory
