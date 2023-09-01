@@ -23,6 +23,9 @@
 
 - hosts: kubernetes_co-control
   tasks:
+  - debug: 
+      msg: "{{ hostvars['K8S_JOIN_HOLDER']['control_command'] }}"
+
   - name: Join {{ ansible_facts['nodename'] }} to the k8s cluster control-plane
     command: "{{ hostvars['K8S_JOIN_HOLDER']['control_command'] }}"
     register: kubeadm_control_join_output
