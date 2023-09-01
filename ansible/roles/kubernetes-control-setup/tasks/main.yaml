@@ -10,7 +10,7 @@
   register: kubeadm_join_command
 
 - name: Create co-control token with kubeadm
-  command: kubeadm token create --print-join-command --control-plane --certificate-key $(kubeadm alpha certs certificate-key)
+  command: kubeadm token create --print-join-command --certificate-key $(kubeadm certs certificate-key)
   register: kubeadm_control_join_command
 
 - name: Ensures /home/erik/.kube dir exists
