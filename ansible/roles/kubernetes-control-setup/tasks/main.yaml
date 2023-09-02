@@ -10,7 +10,7 @@
   register: kubeadm_join_command
 
 - name: Get Certificate key ID
-  command: "kubeadm init phase upload-certs --upload-certs | cut -d : -f 2 | tr -d ' '"
+  shell: "kubeadm init phase upload-certs --upload-certs | cut -d : -f 2 | tr -d ' '"
   register: kubeadm_cert_key
 
 - name: Create co-control token with kubeadm
