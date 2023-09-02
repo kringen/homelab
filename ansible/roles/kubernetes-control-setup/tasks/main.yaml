@@ -10,12 +10,8 @@
   register: kubeadm_join_command
 
 - name: Get Certificate key ID
-  shell: "kubeadm init phase upload-certs --upload-certs | cut -d : -f 2 | tr -d ' '"
+  shell: "kubeadm init phase upload-certs --upload-certs | cut -d : -f 2 | tr -d \" \""
   register: kubeadm_cert_key
-
-- name: Create co-control token with kubeadm
-  command: kubeadm token create --print-join-command --certificate-key {{ kubeadm_cert_key.stdout }}
-  register: kubeadm_control_join_command
 
 - name: Ensures /home/erik/.kube dir exists
   file: 
@@ -38,7 +34,7 @@
 - name: "Add K8S join info to dummy host"
   add_host:
     name:   "K8S_JOIN_HOLDER"
-    control_command: "{{ kubeadm_control_join_command.stdout }}"
+    kubeadm_cert_key: "{{ kubeadm_cert_key.stdout }}"
     join_command:  "{{ kubeadm_join_command.stdout }}"
 
 - name: Create .kube directory

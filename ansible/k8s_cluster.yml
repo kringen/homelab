@@ -27,7 +27,7 @@
       msg: "{{ hostvars['K8S_JOIN_HOLDER']['control_command'] }}"
 
   - name: Join {{ ansible_facts['nodename'] }} to the k8s cluster control-plane
-    command: "{{ hostvars['K8S_JOIN_HOLDER']['control_command'] }}"
+    command: "{{ hostvars['K8S_JOIN_HOLDER']['control_command'] }} --control-plane --certificate-key {{ hostvars['K8S_JOIN_HOLDER']['kubeadm_cert_key'] }}"
     register: kubeadm_control_join_output
     become: yes
 
