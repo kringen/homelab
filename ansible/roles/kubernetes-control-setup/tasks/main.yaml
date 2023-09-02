@@ -10,7 +10,7 @@
   register: kubeadm_join_command
 
 - name: Get Certificate key ID
-  shell: "kubeadm init phase upload-certs --upload-certs | cut -d : -f 2 | tr -d \" \""
+  shell: "kubeadm init phase upload-certs --upload-certs | tail -1
   register: kubeadm_cert_key
 
 - name: Ensures /home/erik/.kube dir exists
