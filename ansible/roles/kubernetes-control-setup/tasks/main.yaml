@@ -48,24 +48,24 @@
     remote_src: yes
     dest: /root/.kube/config
 
-- name: Install the Tigera Operator 
-  command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
-  register: tigera_operator_install
-  failed_when: tigera_operator_install.rc != 0
+#- name: Install the Tigera Operator 
+#  command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
+#  register: tigera_operator_install
+#  failed_when: tigera_operator_install.rc != 0
 
-- debug:
-    msg: "{{ tigera_operator_install.stdout }}"
+#- debug:
+#    msg: "{{ tigera_operator_install.stdout }}"
 
 - name: Copy calico manifest file
   template: 
     src: calico-base.yaml.j2
     dest: $HOME/calico-base.yaml
 
-- name: Install Calico 
-  command: kubectl create -f $HOME/calico-base.yaml 
-  register: calico_install
-  failed_when: calico_install.rc != 0
+#- name: Install Calico 
+#  command: kubectl create -f $HOME/calico-base.yaml 
+#  register: calico_install
+#  failed_when: calico_install.rc != 0
 
-- debug:
-    msg: "{{ calico_install.stdout }}"
+#- debug:
+#    msg: "{{ calico_install.stdout }}"
   
