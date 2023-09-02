@@ -70,11 +70,11 @@
     gpgcheck: yes
     gpgkey: https://download.docker.com/linux/centos/gpg
 
-- name: Install system updates for redhat-based systems
-  yum:
-    name: '*'
-    state: latest
-    update_cache: yes
+#- name: Install system updates for redhat-based systems
+#  yum:
+#    name: '*'
+#    state: latest
+#    update_cache: yes
 
 - name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
   yum:
