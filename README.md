@@ -20,3 +20,19 @@ ansible-playbook -K -i hosts --tags bind site.yml
 
 ## NFS Deployment
 ansible-playbook -K -i hosts --tags nfs site.yml
+
+## Kubernetes Cluster Deployment
+### Deploy the virtual machines using Terraform
+```
+cd homelab/terraform
+
+TF_VAR_redhat_email=<ReplaceWithRedHatEmail> TF_VAR_redhat_password='<ReplaceWithRealPassword>' TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) terraform apply -var-file=homelab.tfvars
+
+```
+### Install kubernetes and configure cluster using ansible
+```
+cd homelab/ansible
+
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key=/home/erik/.ssh/id_rsa -i hosts k8s_cluster.yml -K
+
+```
