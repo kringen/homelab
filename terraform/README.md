@@ -7,16 +7,11 @@ sudo usermod -a -G kvm $(whoami)
 ## libvirt provider
 https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs
 
-## Environment Variables
-export TF_VAR_ssh_public_key1=""
 
-```
-TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) terraform apply -var-file=homelab.tfvars
-```
 ## Custom cloud-init images:
 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_cloud-init_for_rhel_8/configuring-cloud-init_cloud-content
 
 # Create cluster
 ```
-TF_VAR_redhat_email=<ReplaceWithRedHatEmail> TF_VAR_redhat_password='<ReplaceWithRealPassword>' TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) terraform apply -var-file=homelab.tfvars
+TF_VAR_redhat_email=<ReplaceWithRedHatEmail> TF_VAR_redhat_password='<ReplaceWithRealPassword>' TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) TF_VAR_base_image=<base image path> terraform apply -var-file=homelab.tfvars
 ```

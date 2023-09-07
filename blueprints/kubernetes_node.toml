@@ -1,0 +1,24 @@
+name = "kubernetes_node"
+description = "Redhat Image Builder template for a Kubernetes node"
+version = "0.0.2"
+modules = []
+groups = []
+[[packages]]
+name = "chrony"
+version = "*"
+[[packages]]
+name = "kubelet"
+version = "*"
+[[packages]]
+name = "kubectl"
+version = "*"
+[[packages]]
+name = "containerd.io"
+version = "*"
+[[packages]]
+name = "iproute-tc"
+version = "*"
+[[packages]]
+name = "python3"
+version = "*"
+

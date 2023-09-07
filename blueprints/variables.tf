@@ -16,7 +16,3 @@ variable "redhat_email" {
 variable "redhat_password" {
     type = string
 }
-
-variable "base_image" {
-    type = string
-}

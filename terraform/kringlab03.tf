@@ -10,7 +10,7 @@ provider "libvirt" {
 resource "libvirt_volume" "rhel8_base_03" {
   provider = libvirt.kringlab03
   name   = "rhel8_base"
-  source = "/var/lib/libvirt/images/rhel-8.5-x86_64-kvm.qcow2"
+  source = var.base_image
 }
 
 resource "libvirt_volume" "qcow_volume_03" {

@@ -1,9 +1,4 @@
 ---
-- hosts: virtual_machines
-  remote_user: erik
-  roles:
-  - common
-  become: yes
   
 - hosts: proxy
   remote_user: erik

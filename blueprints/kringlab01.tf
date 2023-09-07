@@ -9,8 +9,8 @@ provider "libvirt" {
 # Base OS image to use to create a cluster of different nodes
 resource "libvirt_volume" "rhel8_base_01" {
   provider = libvirt.kringlab01
-  name   = "rhel8_base"
-  source = var.base_image
+  name   = "kubernetes_node"
+  source = "./8332b3c4-e7c9-4f7c-a6d9-8ad45dd6faaf-disk.qcow2"
 }
 
 resource "libvirt_volume" "qcow_volume_01" {
@@ -20,7 +20,7 @@ resource "libvirt_volume" "qcow_volume_01" {
   name = "${each.value.name}.img"
   pool = "default"
   base_volume_id = libvirt_volume.rhel8_base_01.id
-  size = 20 * 1024 * 1024 * 1024 # 20GiB. the root FS is automatically resized by cloud-init growpart (see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#grow-partitions).
+  size = 10 * 1024 * 1024 * 1024 # 20GiB. the root FS is automatically resized by cloud-init growpart (see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#grow-partitions).
 
 }
 

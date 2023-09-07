@@ -51,24 +51,26 @@
     - net.bridge.bridge-nf-call-iptables
     - net.bridge.bridge-nf-call-ip6tables
 
-- name: Add Kubernetes repository 
-  yum_repository:
-    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    name: "kubernetes"
-    state: present 
-    description: "Kubernetes Repository"
-    gpgcheck: yes
-    gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" 
-    exclude: "kubelet kubeadm kubectl"
+# Added the repositories and packages below to the image builder process
+#
+#- name: Add Kubernetes repository 
+#  yum_repository:
+#    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+#    name: "kubernetes"
+#    state: present 
+#    description: "Kubernetes Repository"
+#    gpgcheck: yes
+#    gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" 
+#    exclude: "kubelet kubeadm kubectl"
 
-- name: Add docker-ce repository for containerd 
-  yum_repository:
-    name: "Docker-CE" 
-    description: "Docker CE Stable" 
-    baseurl: https://download.docker.com/linux/centos/8/x86_64/stable/ 
-    state: present
-    gpgcheck: yes
-    gpgkey: https://download.docker.com/linux/centos/gpg
+#- name: Add docker-ce repository for containerd 
+#  yum_repository:
+#    name: "Docker-CE" 
+#    description: "Docker CE Stable" 
+#    baseurl: https://download.docker.com/linux/centos/8/x86_64/stable/ 
+#    state: present
+#    gpgcheck: yes
+#    gpgkey: https://download.docker.com/linux/centos/gpg
 
 #- name: Install system updates for redhat-based systems
 #  yum:
@@ -76,18 +78,18 @@
 #    state: latest
 #    update_cache: yes
 
-- name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
-  yum:
-    name: "{{ packages }}"
-    disable_excludes: "kubernetes"
-    disable_gpg_check: true
-  vars:
-    packages:
-    - containerd.io
-    - kubeadm
-    - kubelet
-    - kubectl
-    - iproute-tc
+#- name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
+#  yum:
+#    name: "{{ packages }}"
+#    disable_excludes: "kubernetes"
+#    disable_gpg_check: true
+#  vars:
+#    packages:
+#    - containerd.io
+#    - kubeadm
+#    - kubelet
+#    - kubectl
+#    - iproute-tc
 
 - name: Dump default configuration for containerd
   shell: containerd config default > /etc/containerd/config.toml

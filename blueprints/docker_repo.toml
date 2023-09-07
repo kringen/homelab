@@ -1,0 +1,9 @@
+id = "docker-ce"
+name = "Docker"
+type = "yum-baseurl"
+url = "https://download.docker.com/linux/centos/8/x86_64/stable/"
+check_gpg = false
+check_ssl = false
+system = false
+#check_repogpg
+#gpgkeys=["https://download.docker.com/linux/centos/gpg"]
