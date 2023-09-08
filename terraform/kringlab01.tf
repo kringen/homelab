@@ -41,6 +41,7 @@ resource "libvirt_domain" "kvm_domain_01" {
   name   = each.value.name
   memory = each.value.memory
   vcpu   = each.value.cpu
+  autostart = true
 
   cloudinit = libvirt_cloudinit_disk.commoninit_01[each.key].id
 

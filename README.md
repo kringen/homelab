@@ -22,14 +22,34 @@ ansible-playbook -K -i hosts --tags bind site.yml
 ansible-playbook -K -i hosts --tags nfs site.yml
 
 ## Kubernetes Cluster Deployment
-### Deploy the virtual machines using Terraform
+### 1 - Generate base kubernetes node image with latest kubelet/kubeadm and other required packages.
+```
+# Modiffy and push the blueprint
+composer-cli blueprints push kubernetes_node.toml
+
+# Check blueprint
+composer-cli blueprints list
+composer-cli blueprints show kubernetes_node
+composer-cli blueprints depsolve kubernetes_node
+
+# Build image
+composer-cli compose start kubernetes_node qcow2
+# Check status
+composer-cli compose status
+# Download image by UUID
+composer-cli compose image UUID
+
+
+```
+
+### 2 - Deploy the virtual machines using Terraform
 ```
 cd homelab/terraform
 
-TF_VAR_redhat_email=<ReplaceWithRedHatEmail> TF_VAR_redhat_password='<ReplaceWithRealPassword>' TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) terraform apply -var-file=homelab.tfvars
+TF_VAR_redhat_email=<ReplaceWithRedHatEmail> TF_VAR_redhat_password='<ReplaceWithRealPassword>' TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) TF_VAR_base_image=<base image path> terraform apply -var-file=homelab.tfvars
 
 ```
-### Install kubernetes and configure cluster using ansible
+### 3 - Install kubernetes and configure cluster using ansible
 ```
 cd homelab/ansible
 
