@@ -33,6 +33,7 @@ Client specs:
 CLIENT_ID=""
 CLIENT_SECRET=""
 TENANT_ID="" 
+ADMIN_GROUP_ID=""
 
 ### Test out token generation
 kubelogin get-token \
@@ -48,9 +49,9 @@ kubectl config set-credentials aad \
   --exec-api-version=client.authentication.k8s.io/v1beta1 \
   --exec-command=kubelogin \
   --exec-arg=get-token \
-  --exec-arg=--oidc-issuer-url=https://sts.windows.net/b021ce92-4160-4e98-9d09-d4f7d27159e1/ \
-  --exec-arg=--oidc-client-id=53225173-1f54-4b33-861a-36e1031a4aa7 \
-  --exec-arg=--oidc-client-secret="Rt28Q~l4GsgiAR4xzP3sWRX.PknD5i0Rspqz7bro" \
+  --exec-arg=--oidc-issuer-url=https://sts.windows.net/${TENANT_ID}/ \
+  --exec-arg=--oidc-client-id=${CLIENT_ID} \
+  --exec-arg=--oidc-client-secret="${CLIENT_SECRET}" \
   --exec-arg=--oidc-extra-scope="email groups"
 ```
 
@@ -82,7 +83,7 @@ roleRef:
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
-  name: "8963f4a8-df40-4c1e-9e84-1325788dba11"
+  name: "${ADMIN_GROUP_ID}"
 ```
 
 ### To logout of the cluster
