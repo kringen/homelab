@@ -20,7 +20,7 @@ kubectl apply -f clusterissuer.yaml
 
 # Create a certificate in istio-system namespace
 ```
-kubectl apply -f certificate.yaml
+kubectl apply -f certificate.yaml -n istio-system
 ```
 
 # Troubleshoot
