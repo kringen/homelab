@@ -1,0 +1,15 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+networking:
+  podSubnet: {{ pod_network }}
+  serviceSubnet: {{ service_network }}
+kubernetesVersion: {{ kubernetes_version }}
+controlPlaneEndpoint: {{ kube_api_server }}:6443
+apiServer:
+  extraArgs:
+    authorization-mode: "Node,RBAC"
+    oidc-issuer-url: https://sts.windows.net/{{ oidc_tenant_id }}/
+    oidc-client-id: {{ oidc_client_id }}
+    oidc-groups-prefix: ""
+    0idc-groups-claim: groups
+    oidc-username-claim: email
