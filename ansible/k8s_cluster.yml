@@ -16,20 +16,20 @@
   - kubernetes-common
   become: yes
 
-#- hosts: kubernetes_control
-#  roles:
-#  - kubernetes-control-setup
-#  become: yes
+- hosts: kubernetes_control
+  roles:
+  - kubernetes-control-setup
+  become: yes
 
-#- hosts: kubernetes_co-control
-#  tasks:
-#  - debug: 
-#      msg: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }}"
+- hosts: kubernetes_co-control
+  tasks:
+  - debug: 
+      msg: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }}"
 
-#  - name: Join {{ ansible_facts['nodename'] }} to the k8s cluster control-plane
-#    command: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }} --control-plane --certificate-key {{ hostvars['K8S_JOIN_HOLDER']['kubeadm_cert_key'] }}"
-#    register: kubeadm_control_join_output
-#    become: yes
+  - name: Join {{ ansible_facts['nodename'] }} to the k8s cluster control-plane
+    command: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }} --control-plane --certificate-key {{ hostvars['K8S_JOIN_HOLDER']['kubeadm_cert_key'] }}"
+    register: kubeadm_control_join_output
+    become: yes
 
 #  - debug: 
 #      msg: "{{ kubeadm_control_join_output }}"
