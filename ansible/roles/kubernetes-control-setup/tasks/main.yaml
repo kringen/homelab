@@ -4,15 +4,15 @@
     src: clusterconfig.yaml.j2
     dest: $HOME/clusterconfig.yaml
 
-#- name: Initialize the Kubernetes Cluster
-#  command: sudo kubeadm init --config=$HOME/clusterconfig.yaml
-#  register: kubeadm_init
-#  failed_when: kubeadm_init.rc != 0
-
 - name: Initialize the Kubernetes Cluster
-  command: kubeadm init --control-plane-endpoint "kube.lab.kringen.local:6443" --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}"
+  command: sudo kubeadm init --config=$HOME/clusterconfig.yaml
   register: kubeadm_init
   failed_when: kubeadm_init.rc != 0
+
+#- name: Initialize the Kubernetes Cluster
+#  command: kubeadm init --control-plane-endpoint "kube.lab.kringen.local:6443" --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}"
+#  register: kubeadm_init
+#  failed_when: kubeadm_init.rc != 0
 
 - name: Create bootstrap token with kubeadm
   command: kubeadm token create --print-join-command 
