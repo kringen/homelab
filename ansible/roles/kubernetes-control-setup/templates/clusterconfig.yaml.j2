@@ -2,21 +2,7 @@ apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
-networking:
-  dnsDomain: cluster.local
-  podSubnet: {{ pod_network }}
-  serviceSubnet: {{ service_network }}
-kubernetesVersion: {{ kubernetes_version }}
-controlPlaneEndpoint: {{ kube_api_server }}
-controllerManager: {}
-scheduler: {}
-dns: {}
-etcd:
-  local:
-    dataDir: /var/lib/etcd
-imageRepository: registry.k8s.io
 apiServer:
-  timeoutForControlPlane: 4m0s
   extraArgs:
     authorization-mode: "Node,RBAC"
     oidc-issuer-url: https://sts.windows.net/{{ oidc_tenant_id }}/
@@ -24,3 +10,17 @@ apiServer:
     oidc-groups-prefix: ""
     oidc-groups-claim: groups
     oidc-username-claim: email
+  timeoutForControlPlane: 4m0s 
+controlPlaneEndpoint: {{ kube_api_server }}
+controllerManager: {}
+dns: {}
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: registry.k8s.io
+kubernetesVersion: {{ kubernetes_version }}
+networking:
+  dnsDomain: cluster.local
+  podSubnet: {{ pod_network }}
+  serviceSubnet: {{ service_network }}
+scheduler: {}
