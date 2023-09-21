@@ -37,6 +37,13 @@
     owner: erik
     group: erik
 
+- name: Print contents of admin.conf
+  command: sudo cat /etc/kubernetes/admin.conf
+  register: admin_conf_contents
+
+- debug:
+    msg: "{{ admin_conf_contents.stdout }}"
+
 - debug: 
     msg: "{{ kubeadm_join_command.stdout }}"
 
