@@ -53,9 +53,13 @@ kubectl config set-credentials aad \
   --exec-arg=--oidc-client-id=${CLIENT_ID} \
   --exec-arg=--oidc-client-secret="${CLIENT_SECRET}" \
   --exec-arg=--oidc-extra-scope="email groups"
+
+kubectl config get-users
+
+kubectl config set-context kubernetes-aad@kubernetes --cluster=kubernetes --user=aad
 ```
 
-### Log onto each control plane node and edit /etc/kubernetes/manifests/kube-apiserver.yaml
+### If adding to an existing cluster, log onto each control plane node and edit /etc/kubernetes/manifests/kube-apiserver.yaml
 Add the following to extraArgs:
 ```yaml
     - --oidc-client-id=<client_id_goes_here>
