@@ -25,7 +25,7 @@ resource "helm_release" "nfs_provisioner" {
   chart      = "nfs-subdir-external-provisioner"
 
   values = [
-    "${file("values.yaml")}"
+    "${file("storage_values.yaml")}"
   ]
   provisioner "local-exec" {
     command = "kubectl patch storageclass nfs-client -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}'"
