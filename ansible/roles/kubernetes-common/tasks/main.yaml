@@ -130,3 +130,7 @@
 
 #- name: reload firewalld
 #  shell: firewall-cmd --reload
+
+- name: Reboot vm and send a message
+  ansible.builtin.reboot:
+    msg: "Rebooting in 5 seconds.  This is required to ensure the kernel modules are loaded."
