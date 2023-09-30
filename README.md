@@ -24,6 +24,8 @@ ansible-playbook -K -i hosts --tags nfs site.yml
 ## Kubernetes Cluster Deployment
 ### 1 - Generate base kubernetes node image with latest kubelet/kubeadm and other required packages.
 ```
+cd homelab/image-builder-blueprints
+
 # Modiffy and push the blueprint
 composer-cli blueprints push kubernetes_node.toml
 
@@ -44,7 +46,7 @@ composer-cli compose image UUID
 
 ### 2 - Deploy the virtual machines using Terraform
 ```
-cd homelab/terraform
+cd homelab/terraform/cluster_deploy
 
 TF_VAR_redhat_email=<ReplaceWithRedHatEmail> TF_VAR_redhat_password='<ReplaceWithRealPassword>' TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) TF_VAR_base_image=<base image path> terraform apply -var-file=homelab.tfvars
 
@@ -55,4 +57,18 @@ cd homelab/ansible
 
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key=/home/erik/.ssh/id_rsa -i hosts k8s_cluster.yml -K
 
+```
+
+### 4 - Install rbac roles, service mesh, and other cluster applications
+These terraform configs will install essential configurations / applications such as:
+* Service Mesh
+* Certificate Manager
+* NFS Storage Class
+* OpenID Connect (OIDC) Authentication
+* Roles & RoleBindings
+
+```
+cd homelab/terraform/cluster_config
+
+terraform apply -var-file=variable.tfvars
 ```
