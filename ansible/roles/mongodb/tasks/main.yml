@@ -1,0 +1,19 @@
+---
+- name: Add MondoDB repository
+  yum_repository:
+    name: mongodb-org-7.0
+    description: MondoDB Repository Repo
+    baseurl: https://repo.mongodb.org/yum/redhat/8/mongodb-org/7.0/x86_64/
+    gpgkey: https://www.mongodb.org/static/pgp/server-7.0.asc
+
+- name: Install MongoDB
+  yum:
+    name: mongodb-org
+    state: present
+    update_cache: yes
+
+- name: Enable and start etcd
+  ansible.builtin.service:
+    name: mongodb
+    enabled: true
+    state: started
