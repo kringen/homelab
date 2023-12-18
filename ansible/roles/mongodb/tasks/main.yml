@@ -14,6 +14,6 @@
 
 - name: Enable and start etcd
   ansible.builtin.service:
-    name: mongodb
+    name: mongod
     enabled: true
     state: started
