@@ -5,9 +5,9 @@
     dest: $HOME/clusterconfig.yaml
 
 - name: Check if kube-apiserver.yaml already exists
-    stat:
-      path:  /etc/kubernetes/manifests/kube-apiserver.yaml
-    register: etc_clusterconfig
+  stat:
+    path:  /etc/kubernetes/manifests/kube-apiserver.yaml
+  register: etc_clusterconfig
 
 - name: Initialize the Kubernetes Cluster
   command: sudo kubeadm init --config=$HOME/clusterconfig.yaml
