@@ -94,7 +94,4 @@
   when: tigera_namespace_exists is failed
   register: calico_install
   failed_when: calico_install.rc != 0
-
-- debug:
-    msg: "{{ calico_install.stdout }}"
   
