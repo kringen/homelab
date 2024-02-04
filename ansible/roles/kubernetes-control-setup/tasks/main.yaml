@@ -76,7 +76,7 @@
   register: tigera_namespace_exists
 
 - debug:
-    msg: "{{ calico_exists.failed }}"
+    msg: "{{ tigera_namespace_exists.failed }}"
 
 - name: Install the Tigera Operator 
   command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
