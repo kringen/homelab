@@ -2,8 +2,14 @@
 - debug: 
     msg: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }}"
 
+- name: Check if /etc/kubernetes/kubelet.conf already exists
+    stat:
+      path:  /etc/kubernetes/kubelet.conf
+    register: etc_kubelet
+
 - name: Join {{ ansible_facts['nodename'] }} to the k8s cluster
   command: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }}"
+  when: not etc_kubelet.stat.exists
   register: kubeadm_join_output
 
 # - name: Enable network modules
@@ -19,6 +25,4 @@
 #   - iptable_mangle
 #   - iptable_filter
 
-- debug:
-    msg: "{{ kubeadm_join_output.stdout }}"
   

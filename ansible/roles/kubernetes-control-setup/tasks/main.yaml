@@ -9,6 +9,10 @@
     path:  /etc/kubernetes/manifests/kube-apiserver.yaml
   register: etc_clusterconfig
 
+- name: Pause before starting again
+  pause:
+    seconds: 30
+
 - name: Initialize the Kubernetes Cluster
   command: sudo kubeadm init --config=$HOME/clusterconfig.yaml
   register: kubeadm_init
