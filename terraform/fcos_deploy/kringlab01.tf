@@ -9,7 +9,7 @@ provider "libvirt" {
 # Base OS image to use to create a cluster of different nodes
 resource "libvirt_volume" "base_01" {
   provider = libvirt.kringlab01
-  name   = "base_image"
+  name   = "base_image_fcos.qcow2"
   source = var.base_image
 }
 
