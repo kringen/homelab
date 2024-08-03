@@ -13,5 +13,5 @@ https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/co
 
 # Create cluster
 ```
-TF_VAR_redhat_email=<ReplaceWithRedHatEmail> TF_VAR_redhat_password='<ReplaceWithRealPassword>' TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) TF_VAR_base_image=<base image path> terraform apply -var-file=homelab.tfvars
+TF_VAR_ssh_public_key=$(cat ~/.ssh/id_rsa.pub) terraform apply -var-file=homelab.tfvars
 ```

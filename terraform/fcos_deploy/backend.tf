@@ -4,7 +4,7 @@ terraform {
     organization = "kringlab"#var.tfc_organization
 
     workspaces {
-      name = "kringlab-infrastructure"#var.tfc_workspace
+      name = "kringlab-infrastructure-fcos"#var.tfc_workspace
     }
   }
 }
