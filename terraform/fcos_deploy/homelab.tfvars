@@ -1,4 +1,4 @@
-base_image = "fedora-coreos-40.20240709.3.1-qemu.x86_64.qcow2"
+base_image = "/var/lib/libvirt/images/fedora-coreos-40.20240709.3.1-qemu.x86_64.qcow2"
 virtual_machines = [ 
     {
         "name"    = "kringfcos01"
