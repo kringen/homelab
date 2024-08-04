@@ -24,13 +24,13 @@ resource "libvirt_volume" "qcow_volume_01" {
 
 }
 
-resource "libvirt_cloudinit_disk" "commoninit_01" {
+resource "libvirt_ignition" "ignition" {
   provider = libvirt.kringlab01
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab01" }
   name           = "${each.value.name}-init.iso"
-  user_data      = data.template_file.user_data[each.key].rendered
-  pool           = "default"
+  name = "ignition"
+  content = data.template_file.ignition_template[each.key].rendered
 }
 
 # Define KVM domain to create
