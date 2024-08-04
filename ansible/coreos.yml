@@ -1,0 +1,7 @@
+---
+
+# Apply common configuration to all hosts
+- hosts: coreos
+  roles:
+  - common
+  become: yes
