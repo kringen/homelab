@@ -14,9 +14,9 @@
   - name: Wait for server to restart
     local_action:
       module: wait_for
+        host={{ inventory_hostname }}
         port=22
         delay=15
-      become: false
 
 - name: Apply common configuration to coreos hosts
   gather_facts: True
