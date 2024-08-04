@@ -20,6 +20,7 @@
 
 - name: Apply common configuration to coreos hosts
   gather_facts: True
+  become: yes
   hosts: coreos
   roles:
   - coreos-common
