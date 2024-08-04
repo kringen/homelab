@@ -13,6 +13,7 @@
   hosts: coreos
   become: yes
   gather_facts: False
+  tasks:
   - name: Wait for server to restart
     reboot:
       reboot_timeout: 3600
