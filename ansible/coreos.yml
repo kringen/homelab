@@ -8,11 +8,16 @@
   - name: Install python
     raw: rpm-ostree install -y python3 --idempotent
     ignore_errors: yes
+
+- name: Refresh system
+  hosts: coreos
+  become: yes
+  gather_facts: False
   - name: Wait for server to restart
     reboot:
       reboot_timeout: 3600
 
-- name: Apply common configuration to all hosts
+- name: Apply common configuration to coreos hosts
   gather_facts: True
   hosts: coreos
   roles:
