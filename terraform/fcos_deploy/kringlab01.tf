@@ -29,7 +29,6 @@ resource "libvirt_ignition" "ignition" {
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab01" }
   name           = "${each.value.name}-init.iso"
-  name = "ignition"
   content = data.template_file.ignition_template[each.key].rendered
 }
 
@@ -43,7 +42,7 @@ resource "libvirt_domain" "kvm_domain_01" {
   vcpu   = each.value.cpu
   autostart = true
 
-  cloudinit = libvirt_cloudinit_disk.commoninit_01[each.key].id
+  coreos_ignition = libvirt_ignition.ignition[each.key].id
 
   disk {
     volume_id = libvirt_volume.qcow_volume_01[each.key].id
