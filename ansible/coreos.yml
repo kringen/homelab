@@ -2,11 +2,15 @@
 - name: setup python for coreos
   hosts: coreos
   become: yes
-  gather_facts: False # would fail since Python isn't installed
+  gather_facts: False
   # Need to install python first before running any other roles
   tasks:
   - name: Install python
     raw: rpm-ostree install -y python3
     ignore_errors: yes
+
+- name: Apply common configuration to all hosts
+  gather_facts: True
+  hosts: coreos
   roles:
   - common
