@@ -7,6 +7,7 @@ passwd:
       - wheel
       - docker
       - systemd-journal
+      - sudo
       ssh_authorized_keys:
       - "${ssh_public_key}"
 storage:
