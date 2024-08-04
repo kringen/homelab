@@ -28,7 +28,7 @@ resource "libvirt_ignition" "ignition" {
   provider = libvirt.kringlab01
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab01" }
-  name           = "${each.value.name}-init.iso"
+  name           = "${each.value.name}-ignition.iso"
   content = data.template_file.ignition_template[each.key].rendered
 }
 

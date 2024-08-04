@@ -1,7 +1,7 @@
 data "template_file" "ignition_template" {
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm }
-  template = file("${path.module}/ignition_template.cfg")
+  template = file("${path.module}/ignition/ignition_template.cfg")
 
   vars = {
    hostname = each.value.name
