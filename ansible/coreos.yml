@@ -6,8 +6,11 @@
   # Need to install python first before running any other roles
   tasks:
   - name: Install python
-    raw: rpm-ostree install -y python3
+    raw: rpm-ostree install -y python3 --idempotent
     ignore_errors: yes
+  - name: Wait for server to restart
+    reboot:
+      reboot_timeout: 3600
 
 - name: Apply common configuration to all hosts
   gather_facts: True
