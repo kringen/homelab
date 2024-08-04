@@ -22,4 +22,4 @@
   gather_facts: True
   hosts: coreos
   roles:
-  - common
+  - coreos-common
