@@ -1,7 +1,7 @@
 #- name: Register system
 #  shell: "subscription-manager register --username {{ redhat_username }} --password {{ redhat_password }} --auto-attach"
 - name: Ensure chrony is installed
-  rpm_ostree_pkg:
+  community.general.rpm_ostree_pkg:
     name: chrony
     state: present
 - name: Start the chrony service
