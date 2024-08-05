@@ -52,16 +52,16 @@
     - net.bridge.bridge-nf-call-ip6tables
 
 # Added the repositories and packages below to the image builder process
-# Uncomment if you want to install the packages here
-- name: Add Kubernetes repository 
-  yum_repository:
-    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    name: "kubernetes"
-    state: present 
-    description: "Kubernetes Repository"
-    gpgcheck: yes
-    gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" 
-    exclude: "kubelet kubeadm kubectl"
+#
+#- name: Add Kubernetes repository 
+#  yum_repository:
+#    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+#    name: "kubernetes"
+#    state: present 
+#    description: "Kubernetes Repository"
+#    gpgcheck: yes
+#    gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" 
+#    exclude: "kubelet kubeadm kubectl"
 
 #- name: Add docker-ce repository for containerd 
 #  yum_repository:
@@ -78,16 +78,18 @@
 #    state: latest
 #    update_cache: yes
 
-- name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
-  package:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-    - kubeadm
-    - kubelet
-    - kubectl
-    - iproute-tc
+#- name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
+#  yum:
+#    name: "{{ packages }}"
+#    disable_excludes: "kubernetes"
+#    disable_gpg_check: true
+#  vars:
+#    packages:
+#    - containerd.io
+#    - kubeadm
+#    - kubelet
+#    - kubectl
+#    - iproute-tc
 
 - name: Dump default configuration for containerd
   shell: containerd config default > /etc/containerd/config.toml
