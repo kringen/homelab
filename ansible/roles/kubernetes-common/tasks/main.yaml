@@ -79,16 +79,16 @@
 #    update_cache: yes
 
 - name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
- yum:
-   name: "{{ packages }}"
-   disable_excludes: "kubernetes"
-   disable_gpg_check: true
- vars:
-   packages:
-   - kubeadm
-   - kubelet
-   - kubectl
-   - iproute-tc
+  yum:
+    name: "{{ packages }}"
+    disable_excludes: "kubernetes"
+    disable_gpg_check: true
+  vars:
+    packages:
+    - kubeadm
+    - kubelet
+    - kubectl
+    - iproute-tc
 
 - name: Dump default configuration for containerd
   shell: containerd config default > /etc/containerd/config.toml
