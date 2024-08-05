@@ -51,8 +51,8 @@
     - net.bridge.bridge-nf-call-iptables
     - net.bridge.bridge-nf-call-ip6tables
 
-Added the repositories and packages below to the image builder process
-
+# Added the repositories and packages below to the image builder process
+# Uncomment if you want to install the packages here
 - name: Add Kubernetes repository 
   yum_repository:
     baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
