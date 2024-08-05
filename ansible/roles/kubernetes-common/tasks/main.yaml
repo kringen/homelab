@@ -79,10 +79,9 @@
 #    update_cache: yes
 
 - name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
-  yum:
+  package:
     name: "{{ packages }}"
-    disable_excludes: "kubernetes"
-    disable_gpg_check: true
+    state: present
   vars:
     packages:
     - kubeadm
