@@ -24,3 +24,4 @@
   hosts: coreos
   roles:
   - coreos-common
+  - kubernetes-common
