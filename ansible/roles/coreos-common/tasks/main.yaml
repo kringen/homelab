@@ -49,15 +49,16 @@
   notify:
     - reload NetworkManager
 
-- name: Add Kubernetes repository 
-  yum_repository:
-    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    name: "kubernetes"
-    state: present 
-    description: "Kubernetes Repository"
-    gpgcheck: yes
-    gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" 
-    exclude: "kubelet kubeadm kubectl"
+- name: Create /etc/yum.repos.d/kubernetes.repo
+  copy:
+    dest: /etc/yum.repos.d/kubernetes.repo
+    content: |
+      [kubernetes]
+      name=Kubernetes
+      baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 
 - name: Dump default configuration for containerd
   shell: rpm-ostree install -y kubelet kubeadm kubectl --idempotent
