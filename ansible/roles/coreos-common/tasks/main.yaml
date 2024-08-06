@@ -71,6 +71,14 @@
 - name: Install kubelet, kubeadm, kubectl
   shell: rpm-ostree install -y kubelet kubeadm kubectl --idempotent
 
+- name: Reboot
+  ansible.builtin.reboot:
+    post_reboot_delay: 10
+    reboot_timeout: 600
+
+- name: Test connection with ping
+  ansible.builtin.ping:
+
 # sudo firewall-cmd --zone=public --permanent --add-port=6443/tcp # Kubernetes API server
 # sudo firewall-cmd --zone=public --permanent --add-port=2379-2380/tcp # etcd server client API
 # sudo firewall-cmd --zone=public --permanent --add-port=10250/tcp # kubelet api
