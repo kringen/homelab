@@ -55,10 +55,39 @@
     content: |
       [kubernetes]
       name=Kubernetes
-      baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+      baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
       enabled=1
       gpgcheck=1
-      gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+      exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
 
 - name: Dump default configuration for containerd
   shell: rpm-ostree install -y kubelet kubeadm kubectl --idempotent
+
+# sudo firewall-cmd --zone=public --permanent --add-port=6443/tcp # Kubernetes API server
+# sudo firewall-cmd --zone=public --permanent --add-port=2379-2380/tcp # etcd server client API
+# sudo firewall-cmd --zone=public --permanent --add-port=10250/tcp # kubelet api
+# sudo firewall-cmd --zone=public --permanent --add-port=10251/tcp # kube-scheduler
+# sudo firewall-cmd --zone=public --permanent --add-port=10252/tcp # kube-controller-manager
+# sudo firewall-cmd --zone=public --permanent --add-port=10255/tcp # Read-only Kubelet API
+# sudo firewall-cmd --zone=public --permanent --add-port=5473/tcp # ClusterControlPlaneConfig API
+# sudo firewall-cmd --zone=public --permanent --add-port=4789/udp # flannel overlay network
+# sudo firewall-cmd --zone=public --permanent --add-port=8285/udp # flannel vxlan
+# sudo firewall-cmd --zone=public --permanent --add-port=8472/udp # flannel udp
+# - name: permit traffic in public zone for services
+#   firewalld:
+#     zone: public
+#     port: "{{ item.port }}"
+#     permanent: yes
+#     state: enabled
+#   loop:
+#     - { port: 6443/tcp }
+#     - { port: 2379-2380/tcp }
+#     - { port: 10250/tcp }
+#     - { port: 10251/tcp }
+#     - { port: 10252/tcp }
+#     - { port: 10255/tcp }
+#     - { port: 5473/tcp }
+#     - { port: 4789/udp }
+#     - { port: 8285/udp }
+#     - { port: 8472/udp }
