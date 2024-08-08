@@ -42,7 +42,7 @@ resource "libvirt_domain" "kvm_domain_01" {
   vcpu   = each.value.cpu
   autostart = true
 
-  coreos_ignition = libvirt_ignition.ignition[each.key].id
+  coreos_ignition = libvirt_ignition.ignition_01[each.key].id
 
   disk {
     volume_id = libvirt_volume.qcow_volume_01[each.key].id
