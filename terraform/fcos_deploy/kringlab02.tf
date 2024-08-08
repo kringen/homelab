@@ -24,7 +24,7 @@ resource "libvirt_volume" "qcow_volume_02" {
 
 }
 
-resource "libvirt_ignition" "ignition" {
+resource "libvirt_ignition" "ignition_02" {
   provider = libvirt.kringlab02
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab02" }
