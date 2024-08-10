@@ -25,15 +25,10 @@ resource "libvirt_volume" "qcow_volume_01" {
 }
 
 ################# Ignition #################
-data "ignition_filesystem" "root" {
-  name = "root"
-  path = "/"
-}
 
 data "ignition_file" "hostname" {
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm }
-  filesystem = "root"
   path       = "/etc/hostname"
   mode       = "420" // 0644
   content {
