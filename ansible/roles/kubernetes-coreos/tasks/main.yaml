@@ -22,6 +22,9 @@
 - name: Install kubelet, kubeadm, kubectl
   shell: rpm-ostree install -y kubelet kubeadm kubectl --idempotent
 
+- name: Replace pause image version
+  shell: sed -i '/^sandbox_image/c\sandbox_image = "registry.k8s.io/pause:3.9"' /etc/containerd/config.toml
+
 - name: Reboot
   ansible.builtin.reboot:
     post_reboot_delay: 10
