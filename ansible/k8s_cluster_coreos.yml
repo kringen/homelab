@@ -16,7 +16,7 @@
       module: wait_for
         host={{ inventory_hostname }}
         port=22
-        delay=15
+        delay=60
 
 - name: Apply common configuration to coreos hosts
   gather_facts: True
