@@ -67,7 +67,7 @@ resource "libvirt_ignition" "ignition_01" {
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab01" }
   name           = "${each.value.name}-ignition.iso"
-  content = ignition_config.ignition_01[each.key].rendered
+  content = data.ignition_config.ignition_01[each.key].rendered
 }
 
 # Define KVM domain to create
