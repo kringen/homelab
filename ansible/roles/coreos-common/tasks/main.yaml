@@ -49,36 +49,6 @@
   notify:
     - reload NetworkManager
 
-- name: Create /etc/yum.repos.d/kubernetes.repo
-  copy:
-    dest: /etc/yum.repos.d/kubernetes.repo
-    content: |
-      [kubernetes]
-      name=Kubernetes
-      baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
-      enabled=1
-      gpgcheck=1
-      gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
-
-- name: Execute 'rpm-ostree refresh-md'
-  ansible.builtin.raw: rpm-ostree refresh-md
-  register: rpm_ostree_output
-
-- name: Print rpm-ostree output
-  ansible.builtin.debug:
-    var: rpm_ostree_output.stdout_lines
-
-- name: Install kubelet, kubeadm, kubectl
-  shell: rpm-ostree install -y kubelet kubeadm kubectl --idempotent
-
-- name: Reboot
-  ansible.builtin.reboot:
-    post_reboot_delay: 10
-    reboot_timeout: 600
-
-- name: Test connection with ping
-  ansible.builtin.ping:
-
 # sudo firewall-cmd --zone=public --permanent --add-port=6443/tcp # Kubernetes API server
 # sudo firewall-cmd --zone=public --permanent --add-port=2379-2380/tcp # etcd server client API
 # sudo firewall-cmd --zone=public --permanent --add-port=10250/tcp # kubelet api

@@ -1,0 +1,171 @@
+---
+
+- name: Create /etc/yum.repos.d/kubernetes.repo
+  copy:
+    dest: /etc/yum.repos.d/kubernetes.repo
+    content: |
+      [kubernetes]
+      name=Kubernetes
+      baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+
+- name: Execute 'rpm-ostree refresh-md'
+  ansible.builtin.raw: rpm-ostree refresh-md
+  register: rpm_ostree_output
+
+- name: Print rpm-ostree output
+  ansible.builtin.debug:
+    var: rpm_ostree_output.stdout_lines
+
+- name: Install kubelet, kubeadm, kubectl
+  shell: rpm-ostree install -y kubelet kubeadm kubectl --idempotent
+
+- name: Reboot
+  ansible.builtin.reboot:
+    post_reboot_delay: 10
+    reboot_timeout: 600
+
+- name: Test connection with ping
+  ansible.builtin.ping:
+
+# This role prepares nodes for kubernetes
+- name: Turn off swap
+  shell: |
+    swapoff -a
+
+- name: Disable swap  
+  lineinfile:
+    path: /etc/fstab
+    regexp: '\sswap\s'
+    state: absent
+
+# - name: Put SELinux in permissive mode, logging actions that would be blocked.
+#   selinux:
+#     policy: targeted
+#     state: permissive
+
+- name: Load the required kernel modules 
+  modprobe:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - br_netfilter
+    - overlay
+
+# Istio was having issues with iptables so ran these commands on worker nodes:
+# https://github.com/istio/istio/issues/23009
+# modprobe br_netfilter ; modprobe nf_nat ; modprobe xt_REDIRECT ; modprobe xt_owner; modprobe iptable_nat; modprobe iptable_mangle; modprobe iptable_filter
+
+- name: Persist kernel module loading  
+  copy:
+    dest: /etc/modules-load.d/k8s.conf 
+    content: |
+      br_netfilter
+      overlay
+      nf_nat
+      xt_REDIRECT
+      xt_owner
+      iptable_nat
+      iptable_mangle
+      iptable_filter
+
+- name: Tune sysctl parameters  in /proc and the sysctl file
+  sysctl:
+    name: "{{ item }}" 
+    value: '1'
+    sysctl_set: yes
+    state: present
+  with_items:
+    - net.ipv4.ip_forward
+    - net.bridge.bridge-nf-call-iptables
+    - net.bridge.bridge-nf-call-ip6tables
+
+# Added the repositories and packages below to the image builder process
+#
+#- name: Add Kubernetes repository 
+#  yum_repository:
+#    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+#    name: "kubernetes"
+#    state: present 
+#    description: "Kubernetes Repository"
+#    gpgcheck: yes
+#    gpgkey: "https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg" 
+#    exclude: "kubelet kubeadm kubectl"
+
+#- name: Add docker-ce repository for containerd 
+#  yum_repository:
+#    name: "Docker-CE" 
+#    description: "Docker CE Stable" 
+#    baseurl: https://download.docker.com/linux/centos/8/x86_64/stable/ 
+#    state: present
+#    gpgcheck: yes
+#    gpgkey: https://download.docker.com/linux/centos/gpg
+
+#- name: Install system updates for redhat-based systems
+#  yum:
+#    name: '*'
+#    state: latest
+#    update_cache: yes
+
+#- name: Install required packages (containerd, kubeadmn, kubectl, kubelet) 
+#  yum:
+#    name: "{{ packages }}"
+#    disable_excludes: "kubernetes"
+#    disable_gpg_check: true
+#  vars:
+#    packages:
+#    - containerd.io
+#    - kubeadm
+#    - kubelet
+#    - kubectl
+#    - iproute-tc
+
+- name: Dump default configuration for containerd
+  shell: containerd config default > /etc/containerd/config.toml
+
+- name: Configure crictl to use containerd
+  copy:
+    dest: /etc/crictl.yaml
+    content: |
+      runtime-endpoint: unix:///run/containerd/containerd.sock
+      image-endpoint: unix:///run/containerd/containerd.sock
+      timeout: 10
+      debug: false
+
+- name: Enable and start the required services (containerd.io, kubelet) 
+  systemd:
+    name: "{{ item }}" 
+    enabled: yes
+    state: started
+  with_items:
+    - containerd
+    - kubelet
+
+#- name: permit traffic in public zone for services
+#  firewalld:
+#    zone: public
+#    port: "{{ item.port }}"
+#    permanent: yes
+#    state: enabled
+#  loop: "{{ firewall_rules }}"
+
+#- name: permit traffic in public zone for services
+#  firewalld:
+#    zone: public
+#    service: "{{ item.service }}"
+#    permanent: yes
+#    state: enabled
+#  loop: "{{ firewall_services }}"
+
+#- name: reload firewalld
+#  shell: firewall-cmd --reload
+
+- name: Reboot vm and send a message
+  ansible.builtin.reboot:
+    msg: "Rebooting in 5 seconds.  This is required to ensure the kernel modules are loaded."
+
+- name: Pause for 60 seconds before starting again
+  pause:
+    seconds: 60

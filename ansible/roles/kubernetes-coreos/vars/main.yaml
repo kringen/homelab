@@ -1,0 +1,17 @@
+---
+# Variables for kubernetes common
+firewall_rules:
+  - port: 6443/tcp
+  - port: 2379/tcp
+  - port: 2380/tcp
+  - port: 10250/tcp
+  - port: 10251/tcp
+  - port: 10252/tcp
+  - port: 179/tcp # calico
+  - port: 5473/tcp # calico
+  - port: 30000-32767/tcp
+
+firewall_services:
+  - service: kube-apiserver
+  - service: etcd-client
+  - service: etcd-server
