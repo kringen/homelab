@@ -12,3 +12,8 @@ variable "ssh_public_key" {
 variable "base_image" {
     type = string
 }
+
+variable "local_user" {
+    type = string
+    description = "Local user to create on the VM"
+}

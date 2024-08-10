@@ -1,4 +1,5 @@
 base_image = "/var/lib/libvirt/images/fedora-coreos-40.20240709.3.1-qemu.x86_64.qcow2"
+local_user = "erik"
 virtual_machines = [ 
     {
         "name"    = "kringnode04"
