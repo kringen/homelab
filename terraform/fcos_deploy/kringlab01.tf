@@ -56,7 +56,7 @@ data "ignition_user" "local_user" {
     name = var.local_user
     home_dir = "/home/erik/"
     shell = "/bin/bash"
-    ssh_authorized_keys = [var.ssh_public_key)]
+    ssh_authorized_keys = [var.ssh_public_key]
     groups = ["sudo", "docker", "wheel", "adm", "systemd-journal"]
 }
 
