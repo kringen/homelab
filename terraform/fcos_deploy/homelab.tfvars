@@ -81,6 +81,15 @@ virtual_machines = [
         "mac"     = "52:54:00:f2:1e:54"
         "bridge"   = "enp6s0"
         "host" = "kringlab03"
+    },
+    {
+        "name"    = "kringsvc01"
+        "domain"  = "lab.kringen.local"
+        "memory"  = "4096"
+        "cpu"     = "4"
+        "mac"     = "52:54:00:f2:1e:65"
+        "bridge"   = "enp38s0"
+        "host" = "kringlab02"
     }
     
     
