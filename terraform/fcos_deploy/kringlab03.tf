@@ -1,4 +1,4 @@
-
+/*
 ///////////////// kringlab03 host ///////////////////
 
 provider "libvirt" {
@@ -66,3 +66,4 @@ resource "libvirt_domain" "kvm_domain_03" {
     wait_for_lease = false
   }
 }
+*/
