@@ -40,7 +40,6 @@ proxy_services_backend:
     backend_hosts:
       - 10.0.0.107
       - 10.0.0.108
-      - 10.0.0.113
 
 firewall_rules:
   - port: 8080/tcp
