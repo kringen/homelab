@@ -56,6 +56,48 @@ virtual_machines = [
         "host" = "kringlab02"
     } ,
     {
+        "name"    = "kringsvc01"
+        "domain"  = "lab.kringen.local"
+        "memory"  = "4096"
+        "cpu"     = "4"
+        "mac"     = "52:54:00:f2:1e:65"
+        "bridge"   = "enp6s0"
+        "host" = "kringlab01"
+    },
+    {
+        "name"    = "kringsvc02"
+        "domain"  = "lab.kringen.local"
+        "memory"  = "4096"
+        "cpu"     = "4"
+        "mac"     = "52:54:00:f2:1e:66"
+        "bridge"   = "enp38s0"
+        "host" = "kringlab02"
+    }
+    
+    
+]
+
+/*
+kringlab03 VMs
+   {
+        "name"    = "kringsvc03"
+        "domain"  = "lab.kringen.local"
+        "memory"  = "4096"
+        "cpu"     = "4"
+        "mac"     = "52:54:00:f2:1e:67"
+        "bridge"   = "enp6s0"
+        "host" = "kringlab03"
+    },
+        {
+        "name"    = "kringnode07"
+        "domain"  = "lab.kringen.local"
+        "memory"  = "8192"
+        "cpu"     = "8"
+        "mac"     = "52:54:00:f2:1e:54"
+        "bridge"   = "enp6s0"
+        "host" = "kringlab03"
+    },
+       {
         "name"    = "kringnode09"
         "domain"  = "lab.kringen.local"
         "memory"  = "8192"
@@ -73,45 +115,8 @@ virtual_machines = [
         "bridge"   = "enp6s0"
         "host" = "kringlab03"
     } ,
-    {
-        "name"    = "kringnode07"
-        "domain"  = "lab.kringen.local"
-        "memory"  = "8192"
-        "cpu"     = "8"
-        "mac"     = "52:54:00:f2:1e:54"
-        "bridge"   = "enp6s0"
-        "host" = "kringlab03"
-    },
-    {
-        "name"    = "kringsvc01"
-        "domain"  = "lab.kringen.local"
-        "memory"  = "4096"
-        "cpu"     = "4"
-        "mac"     = "52:54:00:f2:1e:65"
-        "bridge"   = "enp6s0"
-        "host" = "kringlab01"
-    },
-    {
-        "name"    = "kringsvc02"
-        "domain"  = "lab.kringen.local"
-        "memory"  = "4096"
-        "cpu"     = "4"
-        "mac"     = "52:54:00:f2:1e:66"
-        "bridge"   = "enp38s0"
-        "host" = "kringlab02"
-    },
-    {
-        "name"    = "kringsvc03"
-        "domain"  = "lab.kringen.local"
-        "memory"  = "4096"
-        "cpu"     = "4"
-        "mac"     = "52:54:00:f2:1e:67"
-        "bridge"   = "enp6s0"
-        "host" = "kringlab03"
-    }
-    
-    
-]
+
+*/
 /*
 virtual_machines:
 - vm_name: kringnode04
