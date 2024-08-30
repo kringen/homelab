@@ -3,6 +3,8 @@
 
 - name: Install keepalived and haproxy
   shell: rpm-ostree install -y haproxy keepalived --idempotent
+- name: Set selinux policy
+  shell: setsebool -P haproxy_connect_any 1
   # CoreOS, we need to reboot after installation since it is immutable
 - name: Reboot Raw
   raw: reboot
