@@ -1,13 +1,8 @@
 ---
 # This role installs HAProxy and configures it.
-- name: "Install HAProxy Load balancer"
-  package:
-    name: haproxy
-    state: present
-- name: "Install keepalived"
-  package:
-    name: keepalived
-    state: present
+
+- name: Install keepalived and haproxy
+  shell: rpm-ostree install -y haproxy keepalived --idempotent
 - name: Configure the haproxy cnf file with hosts
   template: 
     src: haproxy.cfg.j2
