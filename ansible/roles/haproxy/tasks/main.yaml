@@ -3,6 +3,16 @@
 
 - name: Install keepalived and haproxy
   shell: rpm-ostree install -y haproxy keepalived --idempotent
+  # CoreOS, we need to reboot after installation since it is immutable
+- name: Reboot Raw
+  raw: reboot
+  ignore_errors: yes
+- name: Wait for server to restart
+  local_action:
+    module: wait_for
+      host={{ inventory_hostname }}
+      port=22
+      delay=60
 - name: Configure the haproxy cnf file with hosts
   template: 
     src: haproxy.cfg.j2
