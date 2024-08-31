@@ -9,93 +9,93 @@
     path:  /etc/kubernetes/manifests/kube-apiserver.yaml
   register: etc_clusterconfig
 
-# - name: Pause before starting again
-#   pause:
-#     seconds: 30
+- name: Pause before starting again
+  pause:
+    seconds: 30
 
-# - name: Initialize the Kubernetes Cluster
-#   command: sudo kubeadm init --config=$HOME/clusterconfig.yaml --upload-certs
-#   register: kubeadm_init
-#   when: not etc_clusterconfig.stat.exists
-#   failed_when: kubeadm_init.rc != 0
+- name: Initialize the Kubernetes Cluster
+  command: sudo kubeadm init --config=$HOME/clusterconfig.yaml --upload-certs
+  register: kubeadm_init
+  when: not etc_clusterconfig.stat.exists
+  failed_when: kubeadm_init.rc != 0
 
-# #- name: Initialize the Kubernetes Cluster
-# #  command: kubeadm init --control-plane-endpoint "kube.lab.kringen.local:6443" --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}"
-# #  register: kubeadm_init
-# #  failed_when: kubeadm_init.rc != 0
+#- name: Initialize the Kubernetes Cluster
+#  command: kubeadm init --control-plane-endpoint "kube.lab.kringen.local:6443" --pod-network-cidr "{{ pod_network }}" --service-cidr "{{ service_network }}"
+#  register: kubeadm_init
+#  failed_when: kubeadm_init.rc != 0
 
-# - name: Create bootstrap token with kubeadm
-#   command: kubeadm token create --print-join-command 
-#   register: kubeadm_join_command
+- name: Create bootstrap token with kubeadm
+  command: kubeadm token create --print-join-command 
+  register: kubeadm_join_command
 
-# - name: Get Certificate key ID
-#   shell: "kubeadm init phase upload-certs --upload-certs | tail -1"
-#   register: kubeadm_cert_key
+- name: Get Certificate key ID
+  shell: "kubeadm init phase upload-certs --upload-certs | tail -1"
+  register: kubeadm_cert_key
 
-# - name: Ensures /home/erik/.kube dir exists
-#   file: 
-#     path: /home/erik/.kube
-#     state: directory
+- name: Ensures /home/erik/.kube dir exists
+  file: 
+    path: /home/erik/.kube
+    state: directory
 
-# - name: Copy admin.conf to local .kube directory
-#   copy:
-#     dest: "/home/erik/.kube/config"
-#     src: "/etc/kubernetes/admin.conf"
-#     force: no
-#     remote_src: yes
-#     mode: 0660
-#     owner: erik
-#     group: erik
+- name: Copy admin.conf to local .kube directory
+  copy:
+    dest: "/home/erik/.kube/config"
+    src: "/etc/kubernetes/admin.conf"
+    force: no
+    remote_src: yes
+    mode: 0660
+    owner: erik
+    group: erik
 
-# - name: Print contents of admin.conf
-#   command: sudo cat /etc/kubernetes/admin.conf
-#   register: admin_conf_contents
+- name: Print contents of admin.conf
+  command: sudo cat /etc/kubernetes/admin.conf
+  register: admin_conf_contents
 
-# - debug:
-#     msg: "{{ admin_conf_contents.stdout }}"
+- debug:
+    msg: "{{ admin_conf_contents.stdout }}"
 
-# - debug: 
-#     msg: "{{ kubeadm_join_command.stdout }}"
+- debug: 
+    msg: "{{ kubeadm_join_command.stdout }}"
 
-# - name: "Add K8S join info to dummy host"
-#   add_host:
-#     name:   "K8S_JOIN_HOLDER"
-#     kubeadm_cert_key: "{{ kubeadm_cert_key.stdout }}"
-#     join_command:  "{{ kubeadm_join_command.stdout }}"
+- name: "Add K8S join info to dummy host"
+  add_host:
+    name:   "K8S_JOIN_HOLDER"
+    kubeadm_cert_key: "{{ kubeadm_cert_key.stdout }}"
+    join_command:  "{{ kubeadm_join_command.stdout }}"
 
-# - name: Create .kube directory
-#   file:
-#     path: /root/.kube
-#     state: directory
+- name: Create .kube directory
+  file:
+    path: /root/.kube
+    state: directory
 
-# - name: Copy kubernetes config file for kubectl
-#   copy:
-#     src: /etc/kubernetes/admin.conf
-#     remote_src: yes
-#     dest: /root/.kube/config
+- name: Copy kubernetes config file for kubectl
+  copy:
+    src: /etc/kubernetes/admin.conf
+    remote_src: yes
+    dest: /root/.kube/config
 
-# - name: Check for existing Calico installation
-#   command: kubectl get namespace tigera-operator
-#   ignore_errors: yes
-#   register: tigera_namespace_exists
+- name: Check for existing Calico installation
+  command: kubectl get namespace tigera-operator
+  ignore_errors: yes
+  register: tigera_namespace_exists
 
-# - debug:
-#     msg: "{{ tigera_namespace_exists.failed }}"
+- debug:
+    msg: "{{ tigera_namespace_exists.failed }}"
 
-# - name: Install the Tigera Operator 
-#   command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
-#   when: tigera_namespace_exists is failed
-#   register: tigera_operator_install
-#   #failed_when: tigera_operator_install.rc != 0
+- name: Install the Tigera Operator 
+  command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
+  when: tigera_namespace_exists is failed
+  register: tigera_operator_install
+  #failed_when: tigera_operator_install.rc != 0
 
-# - name: Copy calico manifest file
-#   template: 
-#     src: calico-base.yaml.j2
-#     dest: $HOME/calico-base.yaml
+- name: Copy calico manifest file
+  template: 
+    src: calico-base.yaml.j2
+    dest: $HOME/calico-base.yaml
 
-# - name: Install Calico 
-#   command: kubectl create -f $HOME/calico-base.yaml 
-#   when: tigera_namespace_exists is failed
-#   register: calico_install
-#   failed_when: calico_install.rc != 0
+- name: Install Calico 
+  command: kubectl create -f $HOME/calico-base.yaml 
+  when: tigera_namespace_exists is failed
+  register: calico_install
+  failed_when: calico_install.rc != 0
   
