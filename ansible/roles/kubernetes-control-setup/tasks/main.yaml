@@ -14,7 +14,7 @@
     seconds: 30
 
 - name: Initialize the Kubernetes Cluster
-  command: sudo kubeadm init --config=$HOME/clusterconfig.yaml --upload-certs
+  command: sudo kubeadm init --config=$HOME/clusterconfig.yaml
   register: kubeadm_init
   when: not etc_clusterconfig.stat.exists
   failed_when: kubeadm_init.rc != 0
