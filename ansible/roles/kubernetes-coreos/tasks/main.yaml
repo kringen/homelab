@@ -28,6 +28,11 @@
 - name: Replace pause image version
   shell: sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
+- name: Replace /etc/sysconfig/kubelet contents
+  ansible.builtin.copy:
+    dest: /etc/sysconfig/kubelet
+    content: 'KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"'
+
 # - name: Replace pause image version
 #   shell: sed -i '/^sandbox_image/c\sandbox_image = "registry.k8s.io/pause:3.9"' /etc/containerd/config.toml
 
