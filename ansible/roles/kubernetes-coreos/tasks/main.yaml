@@ -22,8 +22,14 @@
 - name: Install kubelet, kubeadm, kubectl
   shell: rpm-ostree install -y kubelet kubeadm kubectl --idempotent
 
+- name: Set selinux to permissive
+  shell: setenforce 0
+
 - name: Replace pause image version
-  shell: sed -i '/^sandbox_image/c\sandbox_image = "registry.k8s.io/pause:3.9"' /etc/containerd/config.toml
+  shell: sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+# - name: Replace pause image version
+#   shell: sed -i '/^sandbox_image/c\sandbox_image = "registry.k8s.io/pause:3.9"' /etc/containerd/config.toml
 
 - name: Reboot
   ansible.builtin.reboot:
