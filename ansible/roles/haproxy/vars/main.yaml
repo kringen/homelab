@@ -35,7 +35,7 @@ proxy_services_backend:
     backend_port: 6443
     service_protocol: tcp
     service_options: 
-      - tcplog
+      - httpchk
     balance: roundrobin
     backend_hosts:
       - 10.0.0.107
