@@ -53,11 +53,7 @@ frontend {{ service.service_name }}
 {% for service in proxy_services_backend %}
 {{ service.service_comment }}
 backend {{ service.service_name }}
-  option httpchk
-  
-  http-check connect ssl
-  http-check send meth GET uri /healthz
-  http-check expect status 200
+  option tcp-check
   
   mode tcp
 
