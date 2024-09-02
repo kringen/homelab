@@ -26,10 +26,10 @@
   - coreos-common
   - kubernetes-coreos
 
-- hosts: proxy
-  roles:
-  - haproxy
-  become: yes
+# - hosts: proxy
+#   roles:
+#   - haproxy
+#   become: yes
 
 - hosts: kubernetes_control
   roles:
