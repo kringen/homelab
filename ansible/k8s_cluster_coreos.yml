@@ -41,16 +41,16 @@
 #   - debug: 
 #       msg: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }}"
 
-- name: Check if /etc/kubernetes/kubelet.conf already exists
-  stat:
-    path:  /etc/kubernetes/kubelet.conf
-  register: etc_kubelet
+  # - name: Check if /etc/kubernetes/kubelet.conf already exists
+  #   stat:
+  #     path:  /etc/kubernetes/kubelet.conf
+  #   register: etc_kubelet
 
-- name: Join {{ ansible_facts['nodename'] }} to the k8s cluster control-plane
-  command: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }} --control-plane --certificate-key {{ hostvars['K8S_JOIN_HOLDER']['kubeadm_cert_key'] }}"
-  when: not etc_kubelet.stat.exists
-  register: kubeadm_control_join_output
-  become: yes
+  # - name: Join {{ ansible_facts['nodename'] }} to the k8s cluster control-plane
+  #   command: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }} --control-plane --certificate-key {{ hostvars['K8S_JOIN_HOLDER']['kubeadm_cert_key'] }}"
+  #   when: not etc_kubelet.stat.exists
+  #   register: kubeadm_control_join_output
+  #   become: yes
 
 - hosts: kubernetes_workers
   roles:
