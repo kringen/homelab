@@ -45,4 +45,4 @@ firewall_rules:
   - port: 8080/tcp
   - port: 9000/tcp
 
-virtual_ip_address: "10.0.0.100"
+virtual_ip_address: "10.0.0.100/24"
