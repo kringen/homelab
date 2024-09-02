@@ -11,9 +11,8 @@ apiServer:
     oidc-groups-claim: groups
     oidc-username-claim: email
   timeoutForControlPlane: 4m0s 
-controllerManager:
-  extraArgs: # specify a R/W directory for FlexVolumes (cluster won't work without this even though we use PVs)
-      flex-volume-plugin-dir: "/etc/kubernetes/kubelet-plugins/volume/exec"
+controlPlaneEndpoint: {{ kube_api_server }}
+controllerManager: {}
 dns: {}
 etcd:
   local:
