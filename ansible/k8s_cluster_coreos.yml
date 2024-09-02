@@ -36,10 +36,10 @@
   - kubernetes-control-setup
   become: yes
 
-- hosts: kubernetes_co-control
-  tasks:
-  - debug: 
-      msg: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }}"
+# - hosts: kubernetes_co-control
+#   tasks:
+#   - debug: 
+#       msg: "{{ hostvars['K8S_JOIN_HOLDER']['join_command'] }}"
 
   - name: Check if /etc/kubernetes/kubelet.conf already exists
     stat:
