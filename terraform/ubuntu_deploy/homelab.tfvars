@@ -2,32 +2,32 @@ base_image = "/var/lib/libvirt/images/jammy-server-cloudimg-amd64-disk-kvm.img"
 local_user = "erik"
 virtual_machines = [ 
     {
-        "name"    = "control01"
+        "name"    = "kringnode07"
         "domain"  = "lab.kringen.local"
         "memory"  = "8192"
         "cpu"     = "8"
-        "mac"     = "52:54:00:f2:1e:58"
+        "mac"     = "52:54:00:f2:1e:54"
+        "bridge"   = "enp6s0"
+        "host" = "kringlab01"
+    },
+       {
+        "name"    = "kringnode09"
+        "domain"  = "lab.kringen.local"
+        "memory"  = "8192"
+        "cpu"     = "8"
+        "mac"     = "52:54:00:f2:1e:53"
         "bridge"   = "enp6s0"
         "host" = "kringlab01"
     } ,
     {
-        "name"    = "node01"
+        "name"    = "kringnode08"
         "domain"  = "lab.kringen.local"
         "memory"  = "8192"
         "cpu"     = "8"
-        "mac"     = "52:54:00:f2:1e:59"
-        "bridge"   = "enp6s0"
-        "host" = "kringlab01"
+        "mac"     = "52:54:00:f2:1e:55"
+        "bridge"   = "enp38s0"
+        "host" = "kringlab02"
     } ,
-    {
-        "name"    = "node02"
-        "domain"  = "lab.kringen.local"
-        "memory"  = "8192"
-        "cpu"     = "8"
-        "mac"     = "52:54:00:f2:1e:60"
-        "bridge"   = "enp6s0"
-        "host" = "kringlab01"
-    }
 ]
 
 /*
