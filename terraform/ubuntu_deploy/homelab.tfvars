@@ -1,4 +1,4 @@
-base_image = "/var/lib/libvirt/images/jammy-server-cloudimg-amd64-disk-kvm.img"
+base_image = "/var/lib/libvirt/images/noble-server-cloudimg-amd64.img"
 local_user = "erik"
 virtual_machines = [ 
     {

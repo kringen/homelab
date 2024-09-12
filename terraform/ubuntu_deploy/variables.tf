@@ -9,6 +9,11 @@ variable "ssh_public_key" {
     description = "Public SSH key for connectiong to the VM"
 }
 
+variable "ssh_public_key2" {
+    type = string
+    description = "Public SSH key for connectiong to the VM"
+}
+
 variable "base_image" {
     type = string
 }
