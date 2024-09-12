@@ -74,6 +74,12 @@
     remote_src: yes
     dest: /root/.kube/config
 
+- name: ansible copy file from remote to local.
+  fetch:
+    src: /home/erik/.kube/config
+    dest: /home/erik/.kube/config
+    flat: yes
+
 - name: Check for existing Calico installation
   command: kubectl get namespace tigera-operator
   ignore_errors: yes
