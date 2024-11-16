@@ -3,6 +3,8 @@
   hosts: localhost
   connection: local
   become: true
+  vars_files:
+    - /vars/main.yml
   tasks:
   # This role prepares nodes for kubernetes
   - name: Turn off swap
@@ -46,7 +48,6 @@
     package: name={{ item }} state=present force=yes install_recommends=no
     loop:
     - containerd
-    - kubernetes-cni
     - kubelet
     - kubeadm
     - kubectl
@@ -98,3 +99,14 @@
     with_items:
       - containerd
       - kubelet
+
+  - name: deploy resolv.conf template
+    template:
+      src: templates/resolv.conf.j2
+      dest: /etc/resolv.conf
+      owner: root
+      group: root
+      mode: 0644
+      backup: yes
+    notify:
+      - reload NetworkManager
