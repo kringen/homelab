@@ -1,0 +1,55 @@
+#cloud-config
+autoinstall:
+  apt:
+    disable_components: []
+    fallback: abort
+    geoip: true
+    mirror-selection:
+      primary:
+      - country-mirror
+      - arches: &id001
+        - amd64
+        - i386
+        uri: http://archive.ubuntu.com/ubuntu/
+      - arches: &id002
+        - s390x
+        - arm64
+        - armhf
+        - powerpc
+        - ppc64el
+        - riscv64
+        uri: http://ports.ubuntu.com/ubuntu-ports
+    preserve_sources_list: false
+    security:
+    - arches: *id001
+      uri: http://security.ubuntu.com/ubuntu/
+    - arches: *id002
+      uri: http://ports.ubuntu.com/ubuntu-ports
+  codecs:
+    install: false
+  drivers:
+    install: false
+  identity:
+    hostname: ubuntu
+    password: $6$83kbMHtWxLX5R3Vv$DpGajgnYlnyhbJJ7s1d883cXLXgZkyFbseaZvRzTEdZmK252wUulBK4NIv2tjjIq8IiDJ9wIPZ02eShAsncPq0
+    realname: packer
+    username: packer
+  kernel:
+    package: linux-generic
+  keyboard:
+    layout: us
+    toggle: null
+    variant: ''
+  locale: en_US.UTF-8
+  source:
+    id: ubuntu-server
+    search_drivers: false
+  ssh:
+    allow-pw: true
+    authorized-keys: ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDLw+dkHT2D/w6fQEJoyimRJiqhJMkl3lRalN2KTKM2GRNYT2AKcl4lHmuDBtKRgIt6S0TABHvZlUqX6uUfFC6s5V3mY0JrvDMHdNaBZKnYnUAKluz1AtutdlQni5x5P43uy3+wO1SYeVFera0UTGCChTlBi+hS+UtxATfT0SuN9G++dzScEMMWaCKFnnamH/7jUu3VtoX2/MggGvQ3xl5gWbUIt13X8lL2yT2RKGjGIUFL6xmRGZ4UXZvx8tvNMIKuNV+M0ts1vojcn5mfGYs2tQB52Lm7J/RwciLa2X1/chDO8ZnoqP9FeCzINhShzr90mCNfF3A6F87aoDU53ScVXC3/V20thRQAEWfIURIl3yaneikx48ks7RzFEtZf74y3ET3ruqzBihwK6OiytfQmTf2z8S4TakvGQmdrLSuizvCprXw+nT1PJtEB4pqLJURH8vDzFtOnjs4C+BmXUneqb+MQvyaXA7GelZnlcGzKw1bu4apZtwcmNA+a7I25mMs= erik@kringlab01.kringen.local"]
+    install-server: true
+  storage:
+    layout:
+      name: direct
+  updates: security
+  version: 1
