@@ -1,4 +1,12 @@
 ---
+- name: Reset cloud init
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+  - name: Reset cloud-init
+    shell: cloud-init clean -s -l
+    ignore_errors: yes
 - name: Kubernetes Node Setup
   hosts: localhost
   connection: local
