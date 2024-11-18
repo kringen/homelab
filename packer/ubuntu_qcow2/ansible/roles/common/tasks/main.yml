@@ -2,7 +2,7 @@
 - name: Copy usage file to motd directory
   copy:
       src: 94-usage
-      dest: /etc/udpate-motd.d/94-usage
+      dest: /etc/update-motd.d/94-usage
       owner: root
       group: root
       mode: '0755'
