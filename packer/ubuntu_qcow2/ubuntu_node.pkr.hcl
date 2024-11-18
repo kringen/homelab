@@ -52,5 +52,6 @@ build {
   }
   provisioner "ansible-local" {
     playbook_file = "ansible/playbook.yml"
+    role_paths    = ["ansible/roles"]
   }
 }
