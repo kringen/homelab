@@ -8,14 +8,6 @@
     shell: cloud-init clean --logs
     ignore_errors: yes
 
-- name: Copy usage file to motd directory
-  ansible.builtin.copy:
-    src: 94-usage
-    dest: /etc/udpate-motd.d/94-usage
-    owner: root
-    group: root
-    mode: '0755'
-
 - name: Kubernetes Node Setup
   hosts: localhost
   connection: local
@@ -23,7 +15,13 @@
   vars_files:
     - /vars/main.yml
   tasks:
-  # This role prepares nodes for kubernetes
+  - name: Copy usage file to motd directory
+    copy:
+      src: 94-usage
+      dest: /etc/udpate-motd.d/94-usage
+      owner: root
+      group: root
+      mode: '0755'
   - name: Turn off swap
     shell: |
       swapoff -a
