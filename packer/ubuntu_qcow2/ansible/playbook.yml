@@ -5,8 +5,17 @@
   become: true
   tasks:
   - name: Reset cloud-init
-    shell: cloud-init clean -s -l
+    shell: cloud-init clean --logs
     ignore_errors: yes
+
+- name: Copy usage file to motd directory
+  ansible.builtin.copy:
+    src: 94-usage
+    dest: /etc/udpate-motd.d/94-usage
+    owner: root
+    group: root
+    mode: '0755'
+
 - name: Kubernetes Node Setup
   hosts: localhost
   connection: local
@@ -110,7 +119,7 @@
 
   - name: deploy resolv.conf template
     template:
-      src: templates/resolv.conf.j2
+      src: resolv.conf.j2
       dest: /etc/resolv.conf
       owner: root
       group: root

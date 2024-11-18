@@ -26,7 +26,6 @@ ansible:
     playbook_name: ubuntu.yml
 
 runcmd:
- - touch /etc/cloud/cloud-init.disabled ## Disable cloud-init in the next run
  - sed -ie 's/GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0 elevator=noop"/' /etc/default/grub
  - update-grub2
 
