@@ -107,3 +107,6 @@
     group: root
     mode: 0644
     backup: yes
+
+- name: pull adm images
+  shell: sudo kubeadm config images pull
