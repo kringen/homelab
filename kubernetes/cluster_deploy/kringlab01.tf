@@ -38,7 +38,7 @@ resource "libvirt_domain" "kvm_domain_01" {
   provider = libvirt.kringlab01
   for_each = { for index, vm in var.virtual_machines : 
               vm.name => vm if vm.host == "kringlab01" }
-  name   = each.value.name
+  name   = "${var.cluster_id}-${each.value.name}"
   memory = each.value.memory
   vcpu   = each.value.cpu
   autostart = true

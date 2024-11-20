@@ -1,3 +1,7 @@
+variable "cluster_id" {
+    type = string
+    description = "Unique identifier for the cluster"
+}
 
 variable "virtual_machines" {
     type = list(map(string))

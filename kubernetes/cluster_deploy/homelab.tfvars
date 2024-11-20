@@ -3,7 +3,7 @@ cluster_id = "homelab"
 local_user = "erik"
 virtual_machines = [ 
     {
-        "name"    = "${var.cluster_id}-control-plane"
+        "name"    = "control-plane"
         "domain"  = "lab.kringen.local"
         "memory"  = "4096"
         "cpu"     = "4"
@@ -12,7 +12,7 @@ virtual_machines = [
         "host" = "kringlab01"
     },
     {
-        "name"    = "${var.cluster_id}-node01"
+        "name"    = "node01"
         "domain"  = "lab.kringen.local"
         "memory"  = "4096"
         "cpu"     = "4"
@@ -21,7 +21,7 @@ virtual_machines = [
         "host" = "kringlab01"
     },
     {
-        "name"    = "${var.cluster_id}-node02"
+        "name"    = "node02"
         "domain"  = "lab.kringen.local"
         "memory"  = "4096"
         "cpu"     = "4"
