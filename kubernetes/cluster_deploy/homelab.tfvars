@@ -1,4 +1,4 @@
-base_image = "../ubuntu_qcow2/build/node/ubuntu-2404-amd64.qcow2"
+base_image = "../../packer/k8s_node_ubuntu/build/node/ubuntu-2404-amd64.qcow2"
 cluster_id = "homelab"
 local_user = "erik"
 virtual_machines = [ 
