@@ -8,6 +8,8 @@ virtual_machines = [
         "memory"  = "4096"
         "cpu"     = "4"
         "mac"     = "52:54:00:f2:1e:58"
+        "ip_address" = "10.0.0.108"
+        "role"   = "control-plane"
         "bridge"   = "enp6s0"
         "host" = "kringlab01"
     },
@@ -17,6 +19,8 @@ virtual_machines = [
         "memory"  = "4096"
         "cpu"     = "4"
         "mac"     = "52:54:00:f2:1e:59"
+        "ip_address" = "10.0.0.109"
+        "role"   = "worker_node"
         "bridge"   = "enp6s0"
         "host" = "kringlab01"
     },
@@ -26,6 +30,8 @@ virtual_machines = [
         "memory"  = "4096"
         "cpu"     = "4"
         "mac"     = "52:54:00:f2:1e:60"
+        "ip_address" = "10.0.0.110"
+        "role"   = "worker_node"
         "bridge"   = "enp6s0"
         "host" = "kringlab01"
     },
