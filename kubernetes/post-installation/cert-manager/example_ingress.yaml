@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app1-kringen-io-ingress # Name of your Ingress resource
+  #namespace: default # Or the namespace where your app resides
+  annotations:
+    # --- cert-manager annotations ---
+    cert-manager.io/cluster-issuer: letsencrypt-prod-http01 # <--- Reference your ClusterIssuer
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"         # (Optional) Recommended to redirect HTTP to HTTPS
+    acme.cert-manager.io/http01-edit-in-place: "true" # (Optional) Allows cert-manager to edit the Ingress resource in place for HTTP-01 challenges
+    # --- Other ingress annotations for your controller (e.g., Nginx) ---
+    kubernetes.io/ingress.class: nginx # If you're using older Ingress API or specific ingress controller annotations
+spec:
+  ingressClassName: nginx # <--- IMPORTANT: Match this with your Ingress Controller's class
+  rules:
+  - host: app1.kringen.io
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: nginx-deployment
+            port:
+              number: 80
+  # - host: app2.kringen.io
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: my-other-app-service
+  #           port:
+  #             number: 80
+  tls:
+  - hosts:
+    - app1.kringen.io
+    secretName: app1-kringen-io-tls # cert-manager will create/manage this secret
+  # - hosts:
+  #   - app2.kringen.io
+  #   secretName: app2-kringen-io-tls # cert-manager will create/manage this secret

@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: cert-kringen-io
-  namespace: istio-system
 spec:
   # name of the tls secret to store
   # the generated certificate/key pair
@@ -19,3 +18,5 @@ spec:
    # one or more fully-qualified domain names
    # can be defined here
   - kringen.io
+  - "*.kringen.io"
+  - locahost

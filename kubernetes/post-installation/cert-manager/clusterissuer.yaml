@@ -1,14 +1,18 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt
+  name: letsencrypt-prod-http01
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
+    # You must replace this with your email address
     email: ekringen@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt
+      # Secret resource that will be used to store the ACME account private key.
+      name: letsencrypt-prod-http01-account-key
     solvers:
-      - http01:
-          ingress:
-            class: istio
+    - http01:
+        ingress:
+          class: nginx # <--- IMPORTANT: Replace with the class of your Ingress Controller
+                       # For Nginx, it's typically 'nginx'. For other controllers,
+                       # check their documentation (e.g., 'gce', 'traefik', 'alb')
